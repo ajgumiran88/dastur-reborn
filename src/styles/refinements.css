@@ -366,6 +366,13 @@ html[lang='ar'] .drawer__num {
   font-size: var(--fs-body);
 }
 
+#why .why__title {
+  max-width: none;
+  font-size: clamp(1.5rem, 2.1vw, 2.35rem);
+  line-height: 1.12;
+  white-space: nowrap;
+}
+
 /* 09 — Contact: wrap legal lines, stronger contrast */
 #contact {
   padding-block: clamp(3.5rem, 6vh, 5.25rem) clamp(3.25rem, 5.2vh, 4.75rem) !important;

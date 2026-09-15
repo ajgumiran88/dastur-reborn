@@ -53,15 +53,19 @@ const items = tList<{ title: string; desc: string }>(locale, 'why.items').map((i
   .why__head {
     display: flex;
     flex-direction: column;
-    gap: 0.9rem;
+    gap: 1rem;
+    min-width: 0;
   }
   .why__title {
-    font-size: var(--fs-h2);
-    max-width: 12ch;
+    font-size: clamp(1.65rem, 2.6vw, 2.85rem);
+    max-width: none;
+    line-height: 1.12;
+    white-space: nowrap;
   }
   .why__intro {
     color: var(--text-muted);
-    max-width: 30ch;
+    max-width: 36ch;
+    line-height: 1.65;
   }
 
   .why__list ul {
@@ -97,9 +101,17 @@ const items = tList<{ title: string; desc: string }>(locale, 'why.items').map((i
     line-height: 1.6;
   }
 
+  @media (max-width: 620px) {
+    .why__title {
+      white-space: normal;
+      font-size: clamp(1.75rem, 7.5vw, 2.25rem);
+      max-width: 14ch;
+    }
+  }
+
   @media (min-width: 860px) {
     .why {
-      grid-template-columns: 0.8fr 1.2fr;
+      grid-template-columns: minmax(22rem, 1fr) 1.25fr;
     }
     .why__list ul {
       grid-template-columns: repeat(2, 1fr);
