@@ -174,11 +174,9 @@ html.animate-ready .vertical-scroll [data-animate].is-inview {
   --surface-raised: #faf6ee;
   color: var(--text);
   background-color: #f2e8d8;
-  background-image:
-    linear-gradient(in oklab, transparent 78%, #1c2630 100%),
-    url('/images/menu-background.png');
-  background-position: bottom, center;
-  background-size: 100% 100%, cover;
+  background-image: url('/images/menu-background.png');
+  background-position: center;
+  background-size: cover;
   background-repeat: no-repeat;
 }
 
@@ -257,17 +255,6 @@ html[lang='en'] #menu .menu__title { letter-spacing: 0.035em; }
   --surface: #2a3845;
   background: #1c2630;
   background-color: #1c2630;
-  background-image: linear-gradient(
-    in oklab,
-    #1c2630 0%,
-    #30393b 24%,
-    #69685f 54%,
-    #b7a78e 82%,
-    #f2e0c6 100%
-  );
-  background-position: bottom;
-  background-size: 100% var(--section-transition);
-  background-repeat: no-repeat;
 }
 
 #delivery .del {
@@ -441,11 +428,9 @@ html[lang='en'] #story .story__title {
   --text-muted: rgb(243 237 223 / 0.74);
   color: var(--text);
   background-color: #3b2114;
-  background-image:
-    linear-gradient(in oklab, #f2e0c6 0%, rgb(59 33 20 / 0) 14%),
-    url('/images/experience-brown-background.png');
-  background-position: top, center;
-  background-size: 100% var(--section-transition), cover;
+  background-image: url('/images/experience-brown-background.png');
+  background-position: center;
+  background-size: cover;
   background-repeat: no-repeat;
   padding-block-start: clamp(8rem, 14vh, 10rem) !important;
   padding-block-end: 5.5rem !important;
@@ -473,19 +458,6 @@ html[lang='en'] #story .story__title {
   --bg: var(--hz-ink);
   background: var(--hz-ink);
   background-color: var(--hz-ink);
-  background-image:
-    linear-gradient(
-      in oklab,
-      #111714 0%,
-      #2d342f 24%,
-      #68695e 54%,
-      #b7a78e 82%,
-      #f2e0c6 100%
-    ),
-    radial-gradient(circle at 80% 30%, rgb(212 168 79 / 0.16), transparent 30%);
-  background-position: bottom, center;
-  background-size: 100% var(--section-transition), 100% 100%;
-  background-repeat: no-repeat;
 }
 
 #packaging .pkg { grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); align-items: stretch; gap: clamp(1.5rem, 3vw, 3rem); }
@@ -558,9 +530,6 @@ html[lang='en'] #why .why__itemTitle { letter-spacing: 0.035em; }
 /* 09 — Contact finale */
 #contact {
   background-color: var(--hz-ink);
-  background-image: linear-gradient(in oklab, #f2e0c6 0%, #111714 16%, #111714 100%);
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

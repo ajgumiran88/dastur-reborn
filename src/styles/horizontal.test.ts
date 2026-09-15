@@ -26,15 +26,11 @@ describe('vertical section rhythm', () => {
     expect(framingSectionRule).toMatch(/min-height:\s*100dvh/);
   });
 
-  it('bounds dark-to-parchment fades to a compact transition layer', () => {
-    for (const section of ['delivery', 'packaging']) {
+  it('uses solid backgrounds for dark sections instead of transition gradients', () => {
+    for (const section of ['delivery', 'packaging', 'contact']) {
       const body = ruleBody(`#${section}`);
 
-      expect(body).toMatch(/linear-gradient\(\s*in oklab/);
-      expect(body).toMatch(
-        /background-size:\s*100% var\(--section-transition\)/,
-      );
-      expect(body).toMatch(/#f2e0c6\s+100%/);
+      expect(body).not.toMatch(/linear-gradient/);
     }
   });
 });
