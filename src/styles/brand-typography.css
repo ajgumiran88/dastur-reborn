@@ -1,0 +1,98 @@
+/* Brand guidelines, pp. 6–7: typography and text colours only.
+   The PDF gives no web pixel sizes; this fluid hierarchy adapts its examples.
+   Preserve all content, spacing, surfaces, images, and layout rules. */
+:root {
+  --brand-heading-size: clamp(2rem, 3.4vw, 3.5rem);
+  --brand-copy-size: clamp(0.875rem, 0.83rem + 0.2vw, 1rem);
+  --brand-label-size: clamp(0.72rem, 0.69rem + 0.13vw, 0.82rem);
+}
+
+body, button, input, textarea, select {
+  font-family: var(--font-body);
+}
+
+html[lang='en'] .vertical-scroll :is(h1, h2, h3, h4),
+html[lang='en'] #gallery .gal__label,
+html[lang='en'] #why .why__tagline p {
+  font-family: var(--font-display);
+  font-weight: 400;
+}
+
+html[lang='ar'] .vertical-scroll :is(h1, h2, h3, h4) {
+  font-family: var(--font-arabic-display);
+}
+
+#home, #menu, #story, #gallery, #why {
+  --text: var(--oud);
+  --text-muted: var(--oud);
+  color: var(--oud);
+}
+
+#delivery, #experience, #packaging, #contact {
+  --text: var(--sand);
+  --text-muted: var(--sand);
+  --on-dark-muted: var(--sand);
+  color: var(--sand);
+}
+
+/* Section headings retain their existing line/letter spacing and wrapping. */
+#menu .menu__title, #delivery .del__title, #story .story__title,
+#experience .exp__title, #packaging .pkg__title, #gallery .gal__title,
+#why .why__title {
+  font-size: var(--brand-heading-size);
+}
+
+#home .hero__title { color: var(--palm); }
+#menu .menu__title, #story .story__title, #gallery .gal__title,
+#why .why__title, #why .why__tagline p { color: var(--palm); }
+
+#home .hero__lead, #menu .menu__intro, #menu .dish__name,
+#menu .dish__desc, #menu .dish__details, #menu .dish__price,
+#story .story__body, #story .symbol__title, #story .symbol__desc,
+#gallery .gal__intro, #gallery .gal__label, #gallery .gal__demoTag,
+#why .why__intro, #why .why__itemTitle, #why .why__itemDesc {
+  color: var(--oud);
+}
+
+#home .hero__eyebrow, #menu .eyebrow, #story .eyebrow,
+#gallery .eyebrow, #why .eyebrow, #why .why__index { color: var(--palm); }
+
+#delivery :is(.eyebrow, .del__title, .del__body, .del__sectionLabel, .path__title, .del__fact dt, .del__fact dd, .del__demo),
+#experience :is(.eyebrow, .exp__title, .exp__intro, .exp__stepTitle, .exp__stepDesc, .exp__num),
+#packaging :is(.eyebrow, .pkg__title, .pkg__body, .pkg__points li),
+#contact :is(.footer__h, .footer__statement, .footer__list, .footer__meta dt, .footer__meta dd, .footer__allergen, .footer__copy, .footer__legal) {
+  color: var(--sand);
+}
+
+.nav { color: var(--sand) !important; }
+#home .btn--primary { --btn-fg: var(--sand); }
+#home .btn--ghost { color: var(--palm); }
+#menu .menu__tab { color: var(--oud); }
+#menu .menu__tab[aria-selected='true'] { color: var(--sand); }
+
+#menu .dish__name, #story .symbol__title,
+#experience .exp__stepTitle, #why .why__itemTitle {
+  font-size: clamp(1.15rem, 1rem + 0.6vw, 1.5rem);
+}
+
+#menu .menu__intro, #menu .dish__desc, #story .story__body,
+#story .symbol__desc, #experience .exp__stepDesc, #packaging .pkg__body,
+#packaging .pkg__points li, #why .why__itemDesc,
+#contact .footer__statement, #contact .footer__list {
+  font-size: var(--brand-copy-size);
+}
+
+#menu .dish__details, #menu .menu__tab, #menu .menu__demo,
+#delivery .del__fact dt, .vertical-scroll .eyebrow {
+  font-size: var(--brand-label-size);
+}
+
+#menu .dish__amount, #delivery .path__title,
+#experience .exp__num, #why .why__index {
+  font-family: var(--font-body);
+}
+
+#menu .dmodal { --text: var(--oud); --text-muted: var(--oud); }
+#menu .dmodal__name { font-family: var(--font-display); color: var(--palm); }
+html[lang='ar'] #menu .dmodal__name { font-family: var(--font-arabic-display); }
+#menu .dmodal__desc, #menu .dmodal__price, #menu .dmodal__tag { color: var(--oud); }
