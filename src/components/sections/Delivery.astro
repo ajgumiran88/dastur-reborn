@@ -4,13 +4,17 @@ import Motif from '@/components/ui/Motif.astro';
 import PlatformButton from '@/components/ui/PlatformButton.astro';
 import { site } from '@/config/site';
 import { t, type Locale } from '@/lib/i18n';
-import { orderWaLink, telLink } from '@/lib/links';
+import { orderHref, telLink, isLivePhone } from '@/lib/links';
+import { displayAreas, displayOrUnconfirmed } from '@/lib/placeholders';
+import { preventWidows } from '@/lib/typography';
 
 interface Props {
   locale: Locale;
 }
 const { locale } = Astro.props;
 const platforms = site.deliveryPlatforms.filter((p) => p.enabled);
+const contactValue = displayOrUnconfirmed(locale, site.contact.whatsapp || site.contact.phone);
+const contactIsLive = isLivePhone(site.contact.whatsapp) || isLivePhone(site.contact.phone);
 
 const facts = [
   { key: 'locations', value: site.serviceAreas.join(' · ') },
@@ -25,28 +29,26 @@ const facts = [
   <div class="container del">
     <div class="del__head" data-animate>
       <p class="eyebrow"><Motif name="diamond" />{t(locale, 'delivery.eyebrow')}</p>
-      <h2 id="del-title" class="del__title">{t(locale, 'delivery.title')}</h2>
-      <p class="lead del__body measure">{t(locale, 'delivery.body')}</p>
+      <h2 id="del-title" class="del__title">{preventWidows(t(locale, 'delivery.title'))}</h2>
+      <p class="lead del__body measure">{preventWidows(t(locale, 'delivery.body'))}</p>
     </div>
 
-    {
-      platforms.length > 0 && (
-        <div class="del__platforms" data-animate data-animate-delay="100">
-          <p class="del__sectionLabel del__platformsLabel caps"><span></span>{t(locale, 'delivery.platformsLabel')}<span></span></p>
-          <div class="del__platformGrid">
-            <a class="path path--primary" href={orderWaLink(locale)} target="_blank" rel="noopener noreferrer">
-              <span class="path__ico" aria-hidden="true">
-                <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.6-1.2A9 9 0 1 0 12 3Z" /><path d="M8.5 9.5c.4 3 2.9 5.6 6 6l1.2-1.6 2 .8-.4 2c-4.4.9-9.3-4-8.4-8.4l2-.4.8 2Z" /></svg>
-              </span>
-              <span class="path__text"><span class="path__title">{t(locale, 'delivery.whatsapp')}</span></span>
-            </a>
-            {platforms.map((p) => (
-              <PlatformButton platform={p} />
-            ))}
-          </div>
-        </div>
-      )
-    }
+    <div class="del__platforms" data-animate data-animate-delay="100">
+      <p class="del__sectionLabel del__platformsLabel caps"><span></span>{t(locale, 'delivery.platformsLabel')}<span></span></p>
+      <div class="del__platformGrid">
+        <a class="path path--primary" href={orderHref(locale)} target={orderHref(locale).startsWith('http') ? '_blank' : undefined} rel={orderHref(locale).startsWith('http') ? 'noopener noreferrer' : undefined}>
+          <span class="path__ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.6-1.2A9 9 0 1 0 12 3Z" /><path d="M8.5 9.5c.4 3 2.9 5.6 6 6l1.2-1.6 2 .8-.4 2c-4.4.9-9.3-4-8.4-8.4l2-.4.8 2Z" /></svg>
+          </span>
+          <span class="path__text">
+            <span class="path__title">{t(locale, 'delivery.whatsapp')}</span>
+          </span>
+        </a>
+        {platforms.map((p) => (
+          <PlatformButton platform={p} />
+        ))}
+      </div>
+    </div>
 
     <div class="del__facts" data-animate data-animate-delay="200">
       <dl class="del__factGrid">
@@ -56,7 +58,7 @@ const facts = [
               <dt>{t(locale, `delivery.fields.${f.key}`)}</dt>
               <dd>
                 {f.key === 'contact' ? (
-                  <a href={telLink(f.value)}>{f.value}</a>
+                  <a href={telLink(site.contact.phone || site.contact.whatsapp)}>{f.value}</a>
                 ) : (
                   f.value
                 )}

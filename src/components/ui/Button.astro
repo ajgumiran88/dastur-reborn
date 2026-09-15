@@ -52,8 +52,8 @@ const extra = external ? { target: '_blank', rel: 'noopener noreferrer' } : {};
     align-items: center;
     justify-content: center;
     gap: 0.6em;
-    min-height: 44px;
-    padding: 0.85em 1.6em;
+    min-height: 48px;
+    padding: 0.95em 1.75em;
     border-radius: var(--r-pill);
     font-family: var(--font-body);
     font-size: var(--fs-small);
@@ -76,8 +76,10 @@ const extra = external ? { target: '_blank', rel: 'noopener noreferrer' } : {};
     font-weight: 700;
   }
   .btn--lg {
-    padding: 1.05em 2em;
+    min-height: 56px;
+    padding: 1.15em 2.15em;
     font-size: var(--fs-body);
+    font-weight: 700;
   }
 
   .btn--primary {
@@ -94,9 +96,9 @@ const extra = external ? { target: '_blank', rel: 'noopener noreferrer' } : {};
   }
 
   .btn--ghost {
-    background: transparent;
+    background: color-mix(in srgb, var(--surface-raised) 88%, transparent);
     color: var(--text);
-    border: 1px solid var(--border);
+    border: 2px solid var(--border);
   }
   .btn--ghost:hover {
     border-color: var(--brass);

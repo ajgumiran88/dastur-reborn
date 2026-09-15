@@ -4,6 +4,7 @@ import Motif from '@/components/ui/Motif.astro';
 import DishCard from '@/components/ui/DishCard.astro';
 import { menuCategories } from '@/config/menu';
 import { t, type Locale } from '@/lib/i18n';
+import { preventWidows } from '@/lib/typography';
 
 interface Props {
   locale: Locale;
@@ -14,10 +15,10 @@ const { locale } = Astro.props;
 const dishData = menuCategories.flatMap((c) =>
   c.dishes.map((dish) => ({
     id: dish.id,
-    name: dish.name[locale],
+    name: preventWidows(dish.name[locale]),
     nameAlt: locale === 'ar' ? dish.name.en : '',
     price: `${dish.currency} ${dish.price}`,
-    desc: dish.desc[locale],
+    desc: preventWidows(dish.desc[locale]),
     tags: dish.tags.map((tag) => t(locale, `menu.tags.${tag}`)),
   })),
 );
@@ -28,7 +29,7 @@ const dishData = menuCategories.flatMap((c) =>
     <div class="menu__head" data-animate>
       <p class="eyebrow"><Motif name="diamond" />{t(locale, 'menu.eyebrow')}</p>
       <h2 id="menu-title" class="menu__title">{t(locale, 'menu.title')}</h2>
-      <p class="lead menu__intro measure">{t(locale, 'menu.intro')}</p>
+      <p class="lead menu__intro measure">{preventWidows(t(locale, 'menu.intro'))}</p>
     </div>
 
     <p class="menu__demo" role="note">
@@ -194,10 +195,12 @@ const dishData = menuCategories.flatMap((c) =>
     display: flex;
     flex-direction: column;
     gap: 0.9rem;
-    max-width: 40ch;
+    max-width: 18ch;
+    min-width: 0;
   }
   .menu__title {
-    font-size: var(--fs-h2);
+    font-size: clamp(1.7rem, 2.5vw, 2.9rem);
+    line-height: 1.18;
   }
   .menu__intro {
     color: var(--text-muted);

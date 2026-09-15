@@ -47,6 +47,7 @@
     "eyebrow": "Signature Menu",
     "title": "A Table Set with Intention",
     "intro": "A selection across our kitchen, from slow-cooked rice dishes to sweet endings and Emirati coffee.",
+    "priceTbc": "Price to be confirmed",
     "demoNote": "Sample menu for demonstration. Dishes, descriptions and prices are placeholders; replace with your approved menu before launch.",
     "addToOrder": "Add to order",
     "viewDetails": "View details",
@@ -152,7 +153,12 @@
       "eta": "Expected delivery",
       "contact": "Contact"
     },
+    "platformsPlaceholder": "Delivery partners to be confirmed",
     "demoNote": "Contact details, hours, areas and platform links below are placeholders; confirm your live business details before launch."
+  },
+  "placeholders": {
+    "unconfirmed": "To be confirmed",
+    "badge": "Placeholder"
   },
   "gallery": {
     "eyebrow": "Gallery",

@@ -3,13 +3,16 @@ import { Image } from 'astro:assets';
 import Button from '@/components/ui/Button.astro';
 import Motif from '@/components/ui/Motif.astro';
 import { t, type Locale } from '@/lib/i18n';
-import { orderWaLink } from '@/lib/links';
+import { preventWidows } from '@/lib/typography';
+import { orderHref } from '@/lib/links';
 import skyline from '@/assets/illustration/skyline.png';
 
 interface Props {
   locale: Locale;
 }
 const { locale } = Astro.props;
+const orderLink = orderHref(locale);
+const orderIsExternal = orderLink.startsWith('http');
 ---
 
 <section id="home" class="hero section--oud" aria-labelledby="hero-title">
@@ -39,14 +42,14 @@ const { locale } = Astro.props;
       {t(locale, 'hero.title')}
     </h1>
     <p class="lead hero__lead measure" data-animate data-animate-delay="160">
-      {t(locale, 'hero.body')}
+      {preventWidows(t(locale, 'hero.body'))}
     </p>
     <div class="hero__cta" data-animate data-animate-delay="240">
-      <Button href={orderWaLink(locale)} variant="primary" size="lg" magnetic external>
-        {t(locale, 'hero.ctaOrder')}
-      </Button>
-      <Button href="#menu" variant="ghost" size="lg">
+      <Button href="#menu" variant="primary" size="lg">
         {t(locale, 'hero.ctaMenu')}
+      </Button>
+      <Button href={orderLink} variant="ghost" size="lg" external={orderIsExternal}>
+        {t(locale, 'hero.ctaOrder')}
       </Button>
     </div>
   </div>
@@ -210,21 +213,6 @@ const { locale } = Astro.props;
       60%,
       100% {
         transform: translateY(200%);
-      }
-    }
-    .hero__deco {
-      animation: sway 9s ease-in-out infinite alternate;
-      transform-origin: top center;
-    }
-    .hero__deco--palm2 {
-      animation-duration: 11s;
-    }
-    @keyframes sway {
-      from {
-        rotate: -2deg;
-      }
-      to {
-        rotate: 2deg;
       }
     }
   }

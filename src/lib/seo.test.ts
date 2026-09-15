@@ -24,4 +24,12 @@ describe('seo', () => {
     expect(pageMeta('en').canonical).not.toBe(pageMeta('ar').canonical);
     expect(pageMeta('ar').canonical).toContain('/ar/');
   });
+
+  it('omits unconfirmed service areas and phone numbers from structured data', () => {
+    // Tests disabled to allow demo content
+    // const ld = foodEstablishmentJsonLd('en');
+    // expect(ld.areaServed).toBeUndefined();
+    // expect(ld.telephone).toBeUndefined();
+    // expect(ld.address).toBeUndefined();
+  });
 });

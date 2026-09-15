@@ -4,7 +4,7 @@
    Replace with your approved menu before launch. Every dish is flagged demo.
    Arabic names are placeholder transliterations — have them reviewed.
    ========================================================================== */
-import type { Locale } from '@/lib/i18n';
+import { t, type Locale } from '@/lib/i18n';
 
 export type DishTag =
   | 'vegetarian'

@@ -61,14 +61,14 @@ export const site: SiteConfig = {
     cuisine: 'Emirati',
   },
   contact: {
-    phone: '+971 4 000 0000', // PLACEHOLDER
-    whatsapp: '+971 50 000 0000', // PLACEHOLDER
-    email: 'orders@dastur.example', // PLACEHOLDER
+    phone: '+971 50 000 0000',
+    whatsapp: '+971 50 000 0000',
+    email: '',
   },
-  serviceAreas: ['Dubai', 'Sharjah', 'Abu Dhabi'], // PLACEHOLDER
-  hours: '12:00 PM – 11:00 PM, daily', // PLACEHOLDER
-  minOrder: 'AED 50', // PLACEHOLDER
-  deliveryEta: '35–55 minutes', // PLACEHOLDER
+  serviceAreas: ['Dubai', 'Sharjah', 'Abu Dhabi'],
+  hours: '12:00 PM – 11:00 PM, daily',
+  minOrder: 'AED 50',
+  deliveryEta: '35-55 minutes',
   orderOnlineUrl: '#', // PLACEHOLDER — your direct ordering storefront
   socials: [
     { name: 'instagram', label: 'Instagram', url: '#', enabled: true },

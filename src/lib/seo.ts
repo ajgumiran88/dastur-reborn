@@ -1,5 +1,6 @@
 import type { Locale } from '@/lib/i18n';
 import { site } from '@/config/site';
+import { isUnconfirmed } from '@/lib/placeholders';
 
 export interface HreflangAlt {
   hreflang: string;
@@ -44,6 +45,7 @@ export function pageMeta(locale: Locale): PageMeta {
  * omitted until verified business data is supplied (see README).
  */
 export function foodEstablishmentJsonLd(locale: Locale): Record<string, unknown> {
+  const areas = site.serviceAreas.filter((name) => !isUnconfirmed(name));
   return {
     '@context': 'https://schema.org',
     '@type': 'FoodEstablishment',
@@ -52,14 +54,17 @@ export function foodEstablishmentJsonLd(locale: Locale): Record<string, unknown>
     servesCuisine: 'Emirati',
     url: ORIGIN + (locale === 'ar' ? '/ar/' : '/'),
     image: abs(site.seo.ogImage),
-    priceRange: '$$',
     // Cloud kitchen: delivery/takeaway available, no dine-in seating.
     hasMenu: ORIGIN + (locale === 'ar' ? '/ar/#menu' : '/#menu'),
     servesCuisineDelivery: true,
-    areaServed: site.serviceAreas.map((name) => ({
-      '@type': 'AdministrativeArea',
-      name,
-    })),
+    ...(areas.length
+      ? {
+          areaServed: areas.map((name) => ({
+            '@type': 'AdministrativeArea',
+            name,
+          })),
+        }
+      : {}),
     potentialAction: {
       '@type': 'OrderAction',
       target: ORIGIN + (locale === 'ar' ? '/ar/#delivery' : '/#delivery'),

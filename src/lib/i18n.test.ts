@@ -1,5 +1,23 @@
 import { describe, it, expect } from 'vitest';
+import en from '@/i18n/en.json';
 import { t, tList, dir, localizedPath, otherLocale, LOCALES } from './i18n';
+import { ARABIC_SCRIPT } from './typography';
+
+function collectArabic(value: unknown, path: string, hits: string[]): void {
+  if (typeof value === 'string') {
+    if (ARABIC_SCRIPT.test(value)) hits.push(path);
+    return;
+  }
+  if (Array.isArray(value)) {
+    value.forEach((item, index) => collectArabic(item, `${path}[${index}]`, hits));
+    return;
+  }
+  if (value && typeof value === 'object') {
+    Object.entries(value).forEach(([key, nested]) => {
+      collectArabic(nested, path ? `${path}.${key}` : key, hits);
+    });
+  }
+}
 
 describe('i18n', () => {
   it('resolves a nested EN key', () => {
@@ -43,5 +61,16 @@ describe('i18n', () => {
 
   it('exposes both locales', () => {
     expect(LOCALES).toEqual(['en', 'ar']);
+  });
+
+  it('keeps the English dictionary free of Arabic script', () => {
+    const hits: string[] = [];
+    collectArabic(en, '', hits);
+    expect(hits).toEqual([]);
+  });
+
+  it('labels unconfirmed operational copy clearly', () => {
+    expect(t('en', 'placeholders.unconfirmed')).toMatch(/to be confirmed/i);
+    expect(t('en', 'menu.priceTbc')).toMatch(/price to be confirmed/i);
   });
 });

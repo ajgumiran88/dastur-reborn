@@ -35,7 +35,18 @@ export function orderMessage(locale: Locale, dishName?: string): string {
     : "Hello DASTUR, I'd like to place an order.";
 }
 
+/** True when a phone/WhatsApp value looks like a real international number. */
+export function isLivePhone(value: string): boolean {
+  return digits(value).length >= 8;
+}
+
 /** Convenience: the brand WhatsApp order link for a locale (optional dish). */
 export function orderWaLink(locale: Locale, dishName?: string): string {
   return waLink(site.contact.whatsapp, orderMessage(locale, dishName));
+}
+
+/** Order CTA target — stays on-site until a live WhatsApp number is confirmed. */
+export function orderHref(locale: Locale, dishName?: string): string {
+  if (!isLivePhone(site.contact.whatsapp)) return '#delivery';
+  return orderWaLink(locale, dishName);
 }

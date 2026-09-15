@@ -2,9 +2,9 @@
    The PDF gives no web pixel sizes; this fluid hierarchy adapts its examples.
    Preserve all content, spacing, surfaces, images, and layout rules. */
 :root {
-  --brand-heading-size: clamp(2rem, 3.4vw, 3.5rem);
-  --brand-copy-size: clamp(0.875rem, 0.83rem + 0.2vw, 1rem);
-  --brand-label-size: clamp(0.72rem, 0.69rem + 0.13vw, 0.82rem);
+  --brand-heading-size: clamp(2.15rem, 3.6vw, 3.65rem);
+  --brand-copy-size: clamp(1rem, 0.94rem + 0.28vw, 1.125rem);
+  --brand-label-size: clamp(0.8rem, 0.76rem + 0.16vw, 0.9rem);
 }
 
 body, button, input, textarea, select {
@@ -89,7 +89,13 @@ html[lang='ar'] .vertical-scroll :is(h1, h2, h3, h4) {
 
 #menu .dish__amount, #delivery .path__title,
 #experience .exp__num, #why .why__index {
-  font-family: var(--font-body);
+  font-family: var(--font-display);
+}
+html[lang='ar'] #menu .dish__amount,
+html[lang='ar'] #delivery .path__title,
+html[lang='ar'] #experience .exp__num,
+html[lang='ar'] #why .why__index {
+  font-family: var(--font-arabic-display);
 }
 
 #menu .dmodal { --text: var(--oud); --text-muted: var(--oud); }

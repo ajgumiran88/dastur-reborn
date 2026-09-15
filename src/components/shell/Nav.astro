@@ -4,13 +4,14 @@ import Button from '@/components/ui/Button.astro';
 import LangSwitch from '@/components/ui/LangSwitch.astro';
 import { nav } from '@/config/nav';
 import { t, type Locale } from '@/lib/i18n';
-import { orderWaLink } from '@/lib/links';
+import { orderHref } from '@/lib/links';
 
 interface Props {
   locale: Locale;
 }
 const { locale } = Astro.props;
-const orderHref = orderWaLink(locale);
+const orderHrefValue = orderHref(locale);
+const orderIsExternal = orderHrefValue.startsWith('http');
 ---
 
 <header class="nav" data-nav>
@@ -31,7 +32,7 @@ const orderHref = orderWaLink(locale);
 
     <div class="nav__actions">
       <LangSwitch locale={locale} class="nav__lang" />
-      <Button href={orderHref} variant="primary" magnetic external class="nav__order">
+      <Button href={orderHrefValue} variant="primary" external={orderIsExternal} class="nav__order">
         {t(locale, 'nav.orderNow')}
       </Button>
       <button
@@ -77,7 +78,7 @@ const orderHref = orderWaLink(locale);
     </nav>
     <div class="drawer__foot">
       <LangSwitch locale={locale} />
-      <Button href={orderHref} variant="primary" external class="drawer__order">
+      <Button href={orderHrefValue} variant="primary" external={orderIsExternal} class="drawer__order">
         {t(locale, 'nav.orderNow')}
       </Button>
     </div>

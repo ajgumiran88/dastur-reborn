@@ -1,0 +1,513 @@
+/* DASTUR visual QA: spacing, type, contrast, containers, CTAs, motion.
+   Loaded after tokens, base, horizontal, and brand-typography. */
+
+:root {
+  --fs-eyebrow: clamp(0.78rem, 0.72rem + 0.22vw, 0.88rem);
+  --fs-small: clamp(0.92rem, 0.88rem + 0.18vw, 1rem);
+  --fs-body: clamp(1.05rem, 1rem + 0.22vw, 1.125rem);
+  --fs-lead: clamp(1.15rem, 1.05rem + 0.45vw, 1.4rem);
+  --fs-h4: clamp(1.2rem, 1.08rem + 0.55vw, 1.55rem);
+  --tracking-eyebrow: 0.18em;
+  --tracking-tight: -0.012em;
+  --on-dark-muted: color-mix(in srgb, var(--sand) 88%, #1c2630);
+  --text-faint: color-mix(in srgb, var(--oud-ink) 72%, var(--sand));
+  --space-section: clamp(3.5rem, 2.4rem + 4vw, 5.5rem);
+  --nav-h: 88px;
+}
+
+.vertical-scroll {
+  --section-transition: clamp(3.25rem, 5vh, 4.5rem);
+}
+
+.vertical-scroll > section,
+.vertical-scroll > footer {
+  padding-block: clamp(3.5rem, 6vh, 5.25rem) clamp(3.25rem, 5.2vh, 4.75rem) !important;
+}
+
+.vertical-scroll h1,
+.vertical-scroll h2,
+.vertical-scroll h3 {
+  letter-spacing: var(--tracking-tight);
+  text-wrap: balance;
+}
+
+.vertical-scroll p,
+.vertical-scroll li,
+.vertical-scroll .lead,
+.vertical-scroll .dish__desc,
+.vertical-scroll .symbol__desc,
+.vertical-scroll .why__itemDesc,
+.vertical-scroll .exp__stepDesc,
+.vertical-scroll .pkg__body,
+.vertical-scroll .footer__statement {
+  text-wrap: pretty;
+}
+
+.vertical-scroll .eyebrow {
+  font-size: var(--fs-eyebrow);
+  letter-spacing: var(--tracking-eyebrow);
+}
+
+.vertical-scroll .container {
+  max-width: 1280px;
+}
+
+/* Number treatments match Book Antiqua / Arabic display, not a UI mono. */
+.dish__amount,
+.dmodal__price,
+.exp__num,
+.why__index,
+.drawer__num {
+  font-family: var(--font-display);
+  font-variant-numeric: lining-nums tabular-nums;
+  letter-spacing: 0.02em;
+  font-weight: 700;
+}
+
+html[lang='ar'] .dish__amount,
+html[lang='ar'] .dmodal__price,
+html[lang='ar'] .exp__num,
+html[lang='ar'] .why__index,
+html[lang='ar'] .drawer__num {
+  font-family: var(--font-arabic-display);
+}
+
+/* 01 — Hero overlay: type and CTA weight only; composition stays in horizontal.css. */
+#home .hero__lead {
+  max-width: 48ch;
+  font-size: var(--fs-lead);
+  line-height: 1.65;
+}
+
+#home .hero__cta .btn {
+  min-height: 48px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+/* 02 — Menu: four complete cards, readable type, even grid */
+#menu .container {
+  align-items: start;
+  gap: 1.5rem clamp(1.75rem, 4vw, 4rem);
+}
+
+#menu .menu__head {
+  gap: 1rem;
+  min-width: 0;
+}
+
+#menu .menu__title {
+  font-size: clamp(1.7rem, 2.5vw, 2.9rem);
+  line-height: 1.18;
+}
+
+#menu .menu__intro {
+  font-size: var(--fs-body);
+  line-height: 1.65;
+}
+
+#menu .menu__grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.15rem;
+}
+
+#menu .dish {
+  min-height: 100%;
+}
+
+#menu .dish__media {
+  aspect-ratio: 4 / 3;
+}
+
+#menu .dish__body {
+  gap: 0.85rem;
+  padding: 1.15rem 1.2rem 1.25rem;
+}
+
+#menu .dish__name {
+  font-size: clamp(1.15rem, 1rem + 0.4vw, 1.35rem);
+  line-height: 1.25;
+}
+
+#menu .dish__desc {
+  margin-block: 0;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: #4a3b30;
+}
+
+#menu .dish__amount {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+#menu .dish__pricePlaceholder {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--palm-700);
+}
+
+#menu .dish__details {
+  min-height: 44px;
+  font-size: 0.82rem;
+  color: var(--palm-700);
+}
+
+#menu .menu__tab {
+  min-height: 44px;
+  font-size: 0.82rem;
+}
+
+#menu .menu__demo {
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+/* 03 — Delivery: boxed facts, labeled placeholders, even alignment */
+#delivery .del {
+  gap: 1.75rem;
+}
+
+#delivery .del__head {
+  gap: 1rem;
+}
+
+#delivery .del__title {
+  line-height: 1.12;
+}
+
+#delivery .del__body {
+  font-size: var(--fs-lead);
+  color: color-mix(in srgb, var(--sand) 92%, #fff);
+}
+
+#delivery .del__platformGrid {
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+#delivery .del__placeholderCard,
+#delivery .path--primary,
+#delivery .del__factGrid {
+  border-radius: 18px;
+}
+
+#delivery .del__placeholderCard {
+  display: grid;
+  place-items: center;
+  min-height: 132px;
+  padding: 1.25rem 1.5rem;
+  text-align: center;
+  border: 1px solid color-mix(in srgb, var(--brass-300) 38%, transparent);
+  background: rgb(7 31 28 / 0.55);
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.22);
+  color: var(--sand);
+  font-size: var(--fs-body);
+}
+
+.placeholder-badge {
+  display: inline-block;
+  margin-inline-start: 0.4rem;
+  padding: 0.15em 0.55em;
+  border-radius: var(--r-pill);
+  border: 1px solid color-mix(in srgb, currentColor 35%, transparent);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  vertical-align: middle;
+  color: inherit;
+}
+
+[lang='ar'] .placeholder-badge {
+  letter-spacing: 0.04em;
+  text-transform: none;
+}
+
+#delivery .del__fact dd {
+  font-size: var(--fs-small);
+  color: var(--sand);
+}
+
+#delivery .del__demo {
+  font-size: 0.88rem;
+  color: color-mix(in srgb, var(--sand) 88%, #fff);
+}
+
+/* 04 — Story container already boxed; tighten rhythm */
+#story .story {
+  align-items: stretch;
+}
+
+#story .story__text {
+  gap: 1.15rem;
+}
+
+#story .story__body {
+  gap: 1rem;
+  font-size: var(--fs-body);
+}
+
+#story .symbol__title {
+  font-size: 1.12rem;
+}
+
+#story .symbol__desc {
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+/* 05 — Experience cards, quieter motion, brand numbers */
+#experience {
+  padding-block: clamp(3.5rem, 6vh, 5.25rem) clamp(3.25rem, 5.2vh, 4.75rem) !important;
+}
+
+#experience .exp__head {
+  gap: 1rem;
+  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+#experience .exp__intro,
+#experience .exp__stepDesc {
+  color: color-mix(in srgb, var(--sand) 88%, #fff);
+}
+
+#experience .exp__steps {
+  gap: 1rem;
+}
+
+#experience .exp__step {
+  min-height: 0;
+  transform: none !important;
+}
+
+#experience .exp__num {
+  color: var(--brass-300);
+}
+
+/* 06 — Packaging: still images in a defined showroom, no slideshow */
+#packaging .pkg {
+  align-items: stretch;
+}
+
+#packaging .pkg__media {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 0.85rem;
+  min-height: 420px;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+#packaging .pkg__slide {
+  position: relative;
+  inset: auto;
+  opacity: 1;
+  animation: none;
+  border-radius: 0;
+  overflow: hidden;
+  background: #e9dfd0;
+  border: 1px solid rgb(238 225 207 / 0.24);
+  box-shadow: 0 12px 32px rgb(0 0 0 / 0.24);
+}
+
+#packaging .pkg__slide--1 {
+  grid-row: 1 / -1;
+}
+
+#packaging .pkg__body,
+#packaging .pkg__points li {
+  font-size: var(--fs-body);
+  line-height: 1.65;
+}
+
+/* 07 — Gallery: same parchment family as story/menu */
+#gallery {
+  background:
+    url('/images/story-parchment-background.png') center / cover no-repeat;
+}
+
+#gallery .gal__head {
+  gap: 1rem;
+  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+#gallery .gal__intro {
+  font-size: var(--fs-body);
+}
+
+#gallery .gal__item {
+  border: 1px solid rgb(90 68 50 / 0.2);
+}
+
+#gallery .gal__label {
+  font-size: 1rem;
+}
+
+/* 08 — Why: boxed reasons, brand index color, even two-column rhythm */
+#why .why__index {
+  color: var(--palm-700);
+}
+
+#why .why__list ul {
+  gap: 1rem;
+  column-gap: 1rem;
+}
+
+#why .why__item {
+  align-items: flex-start;
+  gap: 1rem;
+  margin: 0;
+  padding: 1.15rem 1.2rem;
+  background: rgb(250 246 238 / 0.94);
+  border: 1px solid rgb(90 68 50 / 0.2);
+  border-radius: 14px;
+  box-shadow: 0 10px 24px rgb(54 39 27 / 0.12);
+}
+
+#why .why__itemTitle {
+  margin-bottom: 0.45rem;
+  font-size: 1.15rem;
+  line-height: 1.35;
+}
+
+#why .why__itemDesc {
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+#why .why__intro {
+  font-size: var(--fs-body);
+}
+
+/* 09 — Contact: wrap legal lines, stronger contrast */
+#contact {
+  padding-block: clamp(3.5rem, 6vh, 5.25rem) clamp(3.25rem, 5.2vh, 4.75rem) !important;
+}
+
+#contact .footer__statement,
+#contact .footer__list,
+#contact .footer__meta dd,
+#contact .footer__allergen,
+#contact .footer__copy,
+#contact .footer__legal a {
+  color: color-mix(in srgb, var(--sand) 90%, #fff);
+}
+
+#contact .footer__h {
+  font-size: 0.9rem;
+  letter-spacing: 0.12em;
+  color: var(--brass-300);
+}
+
+#contact .footer__allergen {
+  white-space: normal;
+  font-size: 0.88rem;
+  max-width: 62ch;
+}
+
+#contact .footer__list a {
+  opacity: 1;
+}
+
+.lang__opt {
+  opacity: 0.82;
+}
+
+.lang__opt[aria-current='true'] {
+  opacity: 1;
+}
+
+.nav__link {
+  font-size: 0.8rem !important;
+  letter-spacing: 0.1em !important;
+}
+
+/* Contrast: muted copy stays readable on both parchment and dark grounds */
+#menu,
+#story,
+#gallery,
+#why {
+  --text-muted: #4a3b30;
+}
+
+#delivery,
+#experience,
+#packaging,
+#contact {
+  --text-muted: color-mix(in srgb, var(--sand) 88%, #fff);
+  --on-dark-muted: color-mix(in srgb, var(--sand) 88%, #fff);
+}
+
+/* Kill decorative image motion; keep loader/logo elsewhere */
+.dish:hover {
+  transform: none;
+}
+
+.dish:hover .dish__img {
+  transform: none;
+}
+
+.hero__deco {
+  animation: none;
+}
+
+@media (max-width: 899px) {
+  .vertical-scroll > section,
+  .vertical-scroll > footer,
+  #contact,
+  #experience {
+    padding-block: 3.5rem 3.25rem !important;
+  }
+
+  #menu .menu__demo {
+    display: flex;
+  }
+
+  #menu .menu__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #packaging .pkg__media {
+    min-height: 0;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+  }
+
+  #packaging .pkg__slide--1 {
+    grid-row: auto;
+    grid-column: 1 / -1;
+  }
+
+  #experience .exp__steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  #menu .menu__grid,
+  #experience .exp__steps,
+  #delivery .del__platformGrid,
+  #delivery .del__factGrid {
+    grid-template-columns: 1fr;
+  }
+
+  #packaging .pkg__media {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__deco,
+  .pkg__slide,
+  .dish,
+  .dish__img,
+  .btn {
+    animation: none !important;
+    transition: none !important;
+  }
+}

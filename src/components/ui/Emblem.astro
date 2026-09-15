@@ -9,6 +9,7 @@
  * pixel-perfect final production (see README).
  */
 import { t, type Locale } from '@/lib/i18n';
+import { site } from '@/config/site';
 
 interface Props {
   variant?: 'lockup' | 'wordmark' | 'icon';
@@ -131,7 +132,7 @@ const title = t(locale, 'a11y.emblem');
           stroke="none"
           class="emblem__tagline"
         >
-          MUGHAL HERITAGE, SLOW CRAFTED
+          {site.brand.tagline.toUpperCase()}
         </text>
       </svg>
     )
@@ -174,8 +175,8 @@ const title = t(locale, 'a11y.emblem');
     font-family: var(--font-body);
     font-weight: 500;
     font-size: 10px;
-    letter-spacing: 0.34em;
-    transform: translateX(0.17em);
+    letter-spacing: 0.08em;
+    transform: none;
   }
   /* Draw animation is owned by consumers (e.g. the Loader) via `.ln` paths. */
 </style>

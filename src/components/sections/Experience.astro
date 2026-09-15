@@ -2,13 +2,17 @@
 import Section from '@/components/ui/Section.astro';
 import Motif from '@/components/ui/Motif.astro';
 import { t, tList, type Locale } from '@/lib/i18n';
+import { preventWidows } from '@/lib/typography';
 
 interface Props {
   locale: Locale;
 }
 const { locale } = Astro.props;
 
-const steps = tList<{ title: string; desc: string }>(locale, 'experience.steps');
+const steps = tList<{ title: string; desc: string }>(locale, 'experience.steps').map((step) => ({
+  title: preventWidows(step.title),
+  desc: preventWidows(step.desc),
+}));
 const motifs = ['diamond', 'windtower', 'arch', 'dhow'] as const;
 ---
 
@@ -16,8 +20,8 @@ const motifs = ['diamond', 'windtower', 'arch', 'dhow'] as const;
   <div class="container">
     <div class="exp__head" data-animate>
       <p class="eyebrow"><Motif name="diamond" />{t(locale, 'experience.eyebrow')}</p>
-      <h2 id="exp-title" class="exp__title">{t(locale, 'experience.title')}</h2>
-      <p class="lead exp__intro measure">{t(locale, 'experience.intro')}</p>
+      <h2 id="exp-title" class="exp__title">{preventWidows(t(locale, 'experience.title'))}</h2>
+      <p class="lead exp__intro measure">{preventWidows(t(locale, 'experience.intro'))}</p>
     </div>
 
     <ol class="exp__steps" role="list">

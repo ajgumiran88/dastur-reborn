@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import Section from '@/components/ui/Section.astro';
 import Motif from '@/components/ui/Motif.astro';
 import { t, tList, type Locale } from '@/lib/i18n';
+import { preventWidows } from '@/lib/typography';
 import ropeBoxes from '@/assets/packaging/rope-boxes.jpg';
 import greenBento from '@/assets/packaging/green-bento.jpg';
 import kraftBag from '@/assets/packaging/kraft-bag.jpg';
@@ -11,24 +12,16 @@ interface Props {
   locale: Locale;
 }
 const { locale } = Astro.props;
-const points = tList<string>(locale, 'packaging.points');
-const packagingTitle = t(locale, 'packaging.title');
+const points = tList<string>(locale, 'packaging.points').map((point) => preventWidows(point));
+const packagingTitle = preventWidows(t(locale, 'packaging.title'));
 ---
 
 <Section id="packaging" theme="oud" labelledby="pkg-title">
   <div class="container pkg">
     <div class="pkg__text" data-animate>
       <p class="eyebrow"><Motif name="diamond" />{t(locale, 'packaging.eyebrow')}</p>
-      <h2 id="pkg-title" class="pkg__title">
-        {
-          locale === 'en' ? (
-            <><span>Crafted Beyond</span><span>the Kitchen</span></>
-          ) : (
-            packagingTitle
-          )
-        }
-      </h2>
-      <p class="lead pkg__body measure">{t(locale, 'packaging.body')}</p>
+      <h2 id="pkg-title" class="pkg__title">{packagingTitle}</h2>
+      <p class="lead pkg__body measure">{preventWidows(t(locale, 'packaging.body'))}</p>
       <ul class="pkg__points" role="list">
         {
           points.map((p) => (
@@ -123,31 +116,26 @@ const packagingTitle = t(locale, 'packaging.title');
 
   .pkg__media {
     position: relative;
-    min-height: clamp(320px, 38vw, 500px);
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 0.85rem;
+    min-height: clamp(280px, 38vw, 480px);
   }
   .pkg__slide {
-    position: absolute;
-    inset: 0;
+    position: relative;
     margin: 0;
-    border-radius: var(--r-lg);
     overflow: hidden;
-    box-shadow: var(--shadow-dark);
-    opacity: 0;
-    animation: pkg-slide 12s infinite;
+    background: #e9dfd0;
   }
-  .pkg__slide--1 { animation-delay: 0s; }
-  .pkg__slide--2 { animation-delay: 4s; }
-  .pkg__slide--3 { animation-delay: 8s; }
+  .pkg__slide--1 {
+    grid-row: 1 / -1;
+  }
   .pkg__slide :global(img) {
     width: 100%;
     height: 100%;
     object-fit: contain;
     display: block;
-  }
-  @keyframes pkg-slide {
-    0%, 27% { opacity: 1; }
-    33%, 94% { opacity: 0; }
-    100% { opacity: 1; }
   }
 
   @media (min-width: 900px) {
@@ -155,8 +143,20 @@ const packagingTitle = t(locale, 'packaging.title');
       grid-template-columns: 0.9fr 1.1fr;
     }
   }
-  @media (prefers-reduced-motion: reduce) {
-    .pkg__slide { animation: none; opacity: 0; }
-    .pkg__slide--1 { opacity: 1; }
+  @media (max-width: 899px) {
+    .pkg__media {
+      grid-template-columns: 1fr 1fr;
+      min-height: 0;
+    }
+    .pkg__slide--1 {
+      grid-row: auto;
+      grid-column: 1 / -1;
+      aspect-ratio: 4 / 3;
+    }
+  }
+  @media (max-width: 520px) {
+    .pkg__media {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

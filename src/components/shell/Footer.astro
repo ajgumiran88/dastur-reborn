@@ -3,7 +3,9 @@ import Emblem from '@/components/ui/Emblem.astro';
 import { nav } from '@/config/nav';
 import { site } from '@/config/site';
 import { t, type Locale } from '@/lib/i18n';
-import { telLink, mailto, orderWaLink } from '@/lib/links';
+import { telLink, mailto, orderHref, isLivePhone } from '@/lib/links';
+import { displayAreas, displayOrUnconfirmed } from '@/lib/placeholders';
+import { preventWidows } from '@/lib/typography';
 
 interface Props {
   locale: Locale;
@@ -18,28 +20,59 @@ const socials = site.socials.filter((s) => s.enabled);
   <div class="container footer__grid">
     <div class="footer__brand">
       <Emblem variant="lockup" tone="sand" locale={locale} class="footer__logo" />
-      <p class="footer__statement measure--narrow">{t(locale, 'footer.statement')}</p>
+      <p class="footer__statement measure--narrow">{preventWidows(t(locale, 'footer.statement'))}</p>
     </div>
 
     <div class="footer__col">
       <h2 class="footer__h caps">{t(locale, 'footer.contact')}</h2>
       <ul role="list" class="footer__list">
         <li>
-          <a href={orderWaLink(locale)} target="_blank" rel="noopener noreferrer">
-            WhatsApp
-          </a>
+          {isLivePhone(site.contact.whatsapp) ? (
+            <a href={orderHref(locale)} target="_blank" rel="noopener noreferrer">
+              WhatsApp
+            </a>
+          ) : (
+            <>
+              WhatsApp
+              <span class="placeholder-badge">{t(locale, 'placeholders.badge')}</span>
+            </>
+          )}
         </li>
-        <li><a href={telLink(site.contact.phone)}>{site.contact.phone}</a></li>
-        <li><a href={mailto(site.contact.email)}>{site.contact.email}</a></li>
+        <li>
+          {isLivePhone(site.contact.phone) ? (
+            <a href={telLink(site.contact.phone)}>{site.contact.phone}</a>
+          ) : (
+            <>
+              {displayOrUnconfirmed(locale, site.contact.phone)}
+              <span class="placeholder-badge">{t(locale, 'placeholders.badge')}</span>
+            </>
+          )}
+        </li>
+        <li>
+          {site.contact.email && !site.contact.email.includes('example') && site.contact.email.includes('@') ? (
+            <a href={mailto(site.contact.email)}>{site.contact.email}</a>
+          ) : (
+            <>
+              {displayOrUnconfirmed(locale, site.contact.email)}
+              <span class="placeholder-badge">{t(locale, 'placeholders.badge')}</span>
+            </>
+          )}
+        </li>
       </ul>
       <dl class="footer__meta">
         <div>
           <dt>{t(locale, 'delivery.fields.locations')}</dt>
-          <dd>{site.serviceAreas.join(' · ')}</dd>
+          <dd>
+            {displayAreas(locale, site.serviceAreas)}
+            <span class="placeholder-badge">{t(locale, 'placeholders.badge')}</span>
+          </dd>
         </div>
         <div>
           <dt>{t(locale, 'delivery.fields.hours')}</dt>
-          <dd>{site.hours}</dd>
+          <dd>
+            {displayOrUnconfirmed(locale, site.hours)}
+            <span class="placeholder-badge">{t(locale, 'placeholders.badge')}</span>
+          </dd>
         </div>
       </dl>
     </div>
@@ -106,7 +139,7 @@ const socials = site.socials.filter((s) => s.enabled);
   </div>
 
   <div class="container">
-    <p class="footer__allergen">{t(locale, 'footer.allergenNote')}</p>
+    <p class="footer__allergen">{preventWidows(t(locale, 'footer.allergenNote'))}</p>
   </div>
 
   <div class="container footer__bottom">

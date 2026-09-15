@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import Section from '@/components/ui/Section.astro';
 import Motif from '@/components/ui/Motif.astro';
 import { t, type Locale } from '@/lib/i18n';
+import { preventWidows } from '@/lib/typography';
 import heritage from '@/assets/story/heritage-landscape.jpg';
 
 interface Props {
@@ -24,12 +25,12 @@ const symbols = [
         <Motif name="diamond" />{t(locale, 'story.eyebrow')}
       </p>
       <h2 class="story__title" id="story-title" data-animate data-animate-delay="60">
-        {t(locale, 'story.title')}
+        {preventWidows(t(locale, 'story.title'))}
       </h2>
       <div class="story__body" data-animate data-animate-delay="120">
-        <p>{t(locale, 'story.p1')}</p>
-        <p>{t(locale, 'story.p2')}</p>
-        <p>{t(locale, 'story.p3')}</p>
+        <p>{preventWidows(t(locale, 'story.p1'))}</p>
+        <p>{preventWidows(t(locale, 'story.p2'))}</p>
+        <p>{preventWidows(t(locale, 'story.p3'))}</p>
       </div>
 
       <div class="story__symbols" data-animate data-animate-delay="180">
@@ -39,8 +40,8 @@ const symbols = [
               <li class="symbol">
                 <span class="symbol__ico"><Motif name={s.motif} /></span>
                 <div>
-                  <h3 class="symbol__title">{t(locale, `story.symbols.${s.key}`)}</h3>
-                  <p class="symbol__desc">{t(locale, `story.symbols.${s.key}Desc`)}</p>
+                  <h3 class="symbol__title">{preventWidows(t(locale, `story.symbols.${s.key}`))}</h3>
+                  <p class="symbol__desc">{preventWidows(t(locale, `story.symbols.${s.key}Desc`))}</p>
                 </div>
               </li>
             ))
