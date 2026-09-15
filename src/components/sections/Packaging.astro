@@ -13,14 +13,20 @@ interface Props {
 }
 const { locale } = Astro.props;
 const points = tList<string>(locale, 'packaging.points').map((point) => preventWidows(point));
-const packagingTitle = preventWidows(t(locale, 'packaging.title'));
+const packagingTitle = t(locale, 'packaging.title');
+const titleLines =
+  locale === 'en' ? ['Crafted Beyond', 'the Kitchen'] : [packagingTitle];
 ---
 
 <Section id="packaging" theme="oud" labelledby="pkg-title">
   <div class="container pkg">
     <div class="pkg__text" data-animate>
       <p class="eyebrow"><Motif name="diamond" />{t(locale, 'packaging.eyebrow')}</p>
-      <h2 id="pkg-title" class="pkg__title">{packagingTitle}</h2>
+      <h2 id="pkg-title" class="pkg__title">
+        {titleLines.map((line) => (
+          <span>{line}</span>
+        ))}
+      </h2>
       <p class="lead pkg__body measure">{preventWidows(t(locale, 'packaging.body'))}</p>
       <ul class="pkg__points" role="list">
         {
@@ -80,16 +86,17 @@ const packagingTitle = preventWidows(t(locale, 'packaging.title'));
   .pkg__title {
     font-size: var(--fs-h2);
     color: var(--sand);
-    max-width: 15ch;
+    max-width: none;
+    white-space: normal;
   }
   .pkg__title span {
     display: block;
-    white-space: normal;
+    white-space: nowrap;
   }
   .pkg__body {
     color: var(--on-dark-muted);
-    font-size: 0.95rem;
-    line-height: 1.6;
+    font-size: 1.05rem;
+    line-height: 1.65;
   }
   .pkg__points {
     display: flex;
@@ -104,8 +111,8 @@ const packagingTitle = preventWidows(t(locale, 'packaging.title'));
     align-items: center;
     gap: 0.8rem;
     color: var(--sand);
-    font-size: 0.95rem;
-    line-height: 1.6;
+    font-size: 1.05rem;
+    line-height: 1.65;
   }
   .pkg__points :global(.motif) {
     width: 1rem;
@@ -116,26 +123,45 @@ const packagingTitle = preventWidows(t(locale, 'packaging.title'));
 
   .pkg__media {
     position: relative;
-    display: grid;
-    grid-template-columns: 1.15fr 0.85fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 0.85rem;
-    min-height: clamp(280px, 38vw, 480px);
-  }
-  .pkg__slide {
-    position: relative;
-    margin: 0;
+    display: block;
+    min-height: clamp(320px, 42vw, 520px);
     overflow: hidden;
     background: #e9dfd0;
   }
+  .pkg__slide {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    overflow: hidden;
+    background: #e9dfd0;
+    opacity: 0;
+  }
   .pkg__slide--1 {
-    grid-row: 1 / -1;
+    opacity: 1;
   }
   .pkg__slide :global(img) {
     width: 100%;
     height: 100%;
     object-fit: contain;
     display: block;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .pkg__slide {
+      animation: pkg-fade 12s infinite;
+      opacity: 0;
+    }
+    .pkg__slide--1 { animation-delay: 0s; }
+    .pkg__slide--2 { animation-delay: 4s; }
+    .pkg__slide--3 { animation-delay: 8s; }
+    @keyframes pkg-fade {
+      0%,
+      4% { opacity: 0; }
+      8%,
+      30% { opacity: 1; }
+      36%,
+      100% { opacity: 0; }
+    }
   }
 
   @media (min-width: 900px) {
@@ -145,18 +171,8 @@ const packagingTitle = preventWidows(t(locale, 'packaging.title'));
   }
   @media (max-width: 899px) {
     .pkg__media {
-      grid-template-columns: 1fr 1fr;
       min-height: 0;
-    }
-    .pkg__slide--1 {
-      grid-row: auto;
-      grid-column: 1 / -1;
       aspect-ratio: 4 / 3;
-    }
-  }
-  @media (max-width: 520px) {
-    .pkg__media {
-      grid-template-columns: 1fr;
     }
   }
 </style>

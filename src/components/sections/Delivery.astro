@@ -4,8 +4,7 @@ import Motif from '@/components/ui/Motif.astro';
 import PlatformButton from '@/components/ui/PlatformButton.astro';
 import { site } from '@/config/site';
 import { t, type Locale } from '@/lib/i18n';
-import { orderHref, telLink, isLivePhone } from '@/lib/links';
-import { displayAreas, displayOrUnconfirmed } from '@/lib/placeholders';
+import { orderHref, telLink } from '@/lib/links';
 import { preventWidows } from '@/lib/typography';
 
 interface Props {
@@ -13,8 +12,6 @@ interface Props {
 }
 const { locale } = Astro.props;
 const platforms = site.deliveryPlatforms.filter((p) => p.enabled);
-const contactValue = displayOrUnconfirmed(locale, site.contact.whatsapp || site.contact.phone);
-const contactIsLive = isLivePhone(site.contact.whatsapp) || isLivePhone(site.contact.phone);
 
 const facts = [
   { key: 'locations', value: site.serviceAreas.join(' · ') },

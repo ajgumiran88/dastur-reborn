@@ -21,6 +21,7 @@ const socials = site.socials.filter((s) => s.enabled);
     <div class="footer__brand">
       <Emblem variant="lockup" tone="sand" locale={locale} class="footer__logo" />
       <p class="footer__statement measure--narrow">{preventWidows(t(locale, 'footer.statement'))}</p>
+      <p class="footer__taglineText">{t(locale, 'footer.tagline')}</p>
     </div>
 
     <div class="footer__col">
@@ -139,7 +140,7 @@ const socials = site.socials.filter((s) => s.enabled);
   </div>
 
   <div class="container">
-    <p class="footer__allergen">{preventWidows(t(locale, 'footer.allergenNote'))}</p>
+    <p class="footer__allergen">{t(locale, 'footer.allergenNote')}</p>
   </div>
 
   <div class="container footer__bottom">
@@ -179,6 +180,9 @@ const socials = site.socials.filter((s) => s.enabled);
     width: clamp(100px, 24vw, 128px);
     max-width: 128px;
     align-items: center;
+  }
+  .footer__taglineText {
+    margin-top: 0.35rem;
   }
   [dir='rtl'] .footer :global(.footer__logo) {
     align-items: center;
@@ -264,9 +268,10 @@ const socials = site.socials.filter((s) => s.enabled);
     border-top: 1px solid color-mix(in srgb, var(--sand) 14%, transparent);
     font-size: 0.76rem;
     color: var(--on-dark-muted);
-    max-width: 60ch;
+    max-width: none;
     margin-inline: auto;
     text-align: center;
+    white-space: nowrap;
   }
 
   .footer__tagline {
@@ -288,8 +293,9 @@ const socials = site.socials.filter((s) => s.enabled);
   }
   .footer__taglineText {
     font-family: var(--font-display);
-    font-size: clamp(1.3rem, 1rem + 1.6vw, 2rem);
-    letter-spacing: 0.02em;
+    font-size: clamp(1.6rem, 1.1rem + 2vw, 2.6rem);
+    font-weight: 700;
+    letter-spacing: 0.06em;
     color: var(--sand);
   }
   [lang='ar'] .footer__taglineText {

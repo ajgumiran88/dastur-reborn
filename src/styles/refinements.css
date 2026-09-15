@@ -158,7 +158,12 @@ html[lang='ar'] .drawer__num {
 
 #menu .menu__tab {
   min-height: 44px;
-  font-size: 0.82rem;
+  font-size: 0.74rem;
+}
+
+#menu .menu__tabs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 #menu .menu__demo {
@@ -185,7 +190,7 @@ html[lang='ar'] .drawer__num {
 }
 
 #delivery .del__platformGrid {
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 
 #delivery .del__placeholderCard,
@@ -236,37 +241,24 @@ html[lang='ar'] .drawer__num {
   color: color-mix(in srgb, var(--sand) 88%, #fff);
 }
 
-/* 04 — Story container already boxed; tighten rhythm */
-#story .story {
-  align-items: stretch;
-}
-
-#story .story__text {
-  gap: 1.15rem;
+/* 04 — Story: heritage backdrop, text-forward panel */
+#story .story__panel {
+  gap: 1.55rem;
 }
 
 #story .story__body {
-  gap: 1rem;
   font-size: var(--fs-body);
-}
-
-#story .symbol__title {
-  font-size: 1.12rem;
-}
-
-#story .symbol__desc {
-  font-size: 0.92rem;
-  line-height: 1.55;
 }
 
 /* 05 — Experience cards, quieter motion, brand numbers */
 #experience {
-  padding-block: clamp(3.5rem, 6vh, 5.25rem) clamp(3.25rem, 5.2vh, 4.75rem) !important;
+  padding-block-start: clamp(7rem, 12vh, 9.5rem) !important;
+  padding-block-end: clamp(3.75rem, 6vh, 5.5rem) !important;
 }
 
 #experience .exp__head {
-  gap: 1rem;
-  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+  gap: 1.15rem;
+  margin-bottom: clamp(2rem, 4vw, 3.25rem);
 }
 
 #experience .exp__intro,
@@ -275,7 +267,7 @@ html[lang='ar'] .drawer__num {
 }
 
 #experience .exp__steps {
-  gap: 1rem;
+  gap: 1.25rem;
 }
 
 #experience .exp__step {
@@ -287,41 +279,31 @@ html[lang='ar'] .drawer__num {
   color: var(--brass-300);
 }
 
-/* 06 — Packaging: still images in a defined showroom, no slideshow */
+/* 06 — Packaging: slideshow, matched copy size */
 #packaging .pkg {
   align-items: stretch;
 }
 
 #packaging .pkg__media {
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  grid-template-rows: 1fr 1fr;
-  gap: 0.85rem;
-  min-height: 420px;
-  background: transparent;
-  border: 0;
-  box-shadow: none;
-}
-
-#packaging .pkg__slide {
+  display: block;
   position: relative;
-  inset: auto;
-  opacity: 1;
-  animation: none;
-  border-radius: 0;
-  overflow: hidden;
+  min-height: 440px;
   background: #e9dfd0;
   border: 1px solid rgb(238 225 207 / 0.24);
   box-shadow: 0 12px 32px rgb(0 0 0 / 0.24);
 }
 
-#packaging .pkg__slide--1 {
-  grid-row: 1 / -1;
+#packaging .pkg__slide {
+  position: absolute;
+  inset: 0;
+  border-radius: 0;
+  overflow: hidden;
+  background: #e9dfd0;
 }
 
 #packaging .pkg__body,
 #packaging .pkg__points li {
-  font-size: var(--fs-body);
+  font-size: 1.05rem;
   line-height: 1.65;
 }
 
@@ -354,15 +336,15 @@ html[lang='ar'] .drawer__num {
 }
 
 #why .why__list ul {
-  gap: 1rem;
-  column-gap: 1rem;
+  gap: 1.35rem;
+  column-gap: 1.5rem;
 }
 
 #why .why__item {
   align-items: flex-start;
-  gap: 1rem;
+  gap: 1.25rem;
   margin: 0;
-  padding: 1.15rem 1.2rem;
+  padding: 1.45rem 1.35rem;
   background: rgb(250 246 238 / 0.94);
   border: 1px solid rgb(90 68 50 / 0.2);
   border-radius: 14px;
@@ -399,15 +381,20 @@ html[lang='ar'] .drawer__num {
 }
 
 #contact .footer__h {
-  font-size: 0.9rem;
+  font-size: 1.15rem;
   letter-spacing: 0.12em;
   color: var(--brass-300);
 }
 
 #contact .footer__allergen {
-  white-space: normal;
+  white-space: nowrap;
   font-size: 0.88rem;
-  max-width: 62ch;
+  max-width: none;
+}
+
+#contact .footer__taglineText {
+  font-weight: 700;
+  letter-spacing: 0.06em;
 }
 
 #contact .footer__list a {
@@ -464,6 +451,10 @@ html[lang='ar'] .drawer__num {
     padding-block: 3.5rem 3.25rem !important;
   }
 
+  #menu .menu__tabs {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
   #menu .menu__demo {
     display: flex;
   }
@@ -474,13 +465,7 @@ html[lang='ar'] .drawer__num {
 
   #packaging .pkg__media {
     min-height: 0;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto;
-  }
-
-  #packaging .pkg__slide--1 {
-    grid-row: auto;
-    grid-column: 1 / -1;
+    aspect-ratio: 4 / 3;
   }
 
   #experience .exp__steps {
@@ -496,8 +481,12 @@ html[lang='ar'] .drawer__num {
     grid-template-columns: 1fr;
   }
 
-  #packaging .pkg__media {
-    grid-template-columns: 1fr;
+  #menu .menu__tabs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #contact .footer__allergen {
+    white-space: normal;
   }
 }
 
