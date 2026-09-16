@@ -241,13 +241,13 @@ html[lang='ar'] .drawer__num {
   color: color-mix(in srgb, var(--sand) 88%, #fff);
 }
 
-/* 04 — Story: two-column, image top-aligned to Our Story */
+/* 04 — Story: compact enough to sit in one viewport */
 #story .story__copy {
-  gap: 1.45rem;
+  gap: clamp(0.4rem, 1.1dvh, 0.75rem);
 }
 
 #story .story__body {
-  font-size: var(--fs-body);
+  font-size: clamp(0.86rem, 1.35dvh, 1.02rem);
 }
 
 /* 05 — Experience cards, quieter motion, brand numbers */

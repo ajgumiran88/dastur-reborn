@@ -26,6 +26,14 @@ describe('vertical section rhythm', () => {
     expect(framingSectionRule).toMatch(/min-height:\s*100dvh/);
   });
 
+  it('fits Our Story in one desktop viewport', () => {
+    const body = ruleBody('#story');
+    expect(body).toMatch(/min-height:\s*100dvh/);
+    expect(body).toMatch(/height:\s*100dvh/);
+    expect(body).toMatch(/max-height:\s*100dvh/);
+    expect(body).toMatch(/overflow:\s*hidden/);
+  });
+
   it('uses solid backgrounds for dark sections instead of transition gradients', () => {
     for (const section of ['delivery', 'packaging', 'contact']) {
       const body = ruleBody(`#${section}`);
