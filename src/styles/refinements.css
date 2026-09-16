@@ -241,9 +241,9 @@ html[lang='ar'] .drawer__num {
   color: color-mix(in srgb, var(--sand) 88%, #fff);
 }
 
-/* 04 — Story: heritage backdrop, text-forward panel */
-#story .story__panel {
-  gap: 1.55rem;
+/* 04 — Story: two-column, image top-aligned to Our Story */
+#story .story__copy {
+  gap: 1.45rem;
 }
 
 #story .story__body {
@@ -267,7 +267,7 @@ html[lang='ar'] .drawer__num {
 }
 
 #experience .exp__steps {
-  gap: 1.25rem;
+  gap: 1rem;
 }
 
 #experience .exp__step {
@@ -279,9 +279,9 @@ html[lang='ar'] .drawer__num {
   color: var(--brass-300);
 }
 
-/* 06 — Packaging: slideshow, matched copy size */
+/* 06 — Packaging: slideshow, copy aligned to the image box, no left panel */
 #packaging .pkg {
-  align-items: stretch;
+  align-items: start;
 }
 
 #packaging .pkg__media {

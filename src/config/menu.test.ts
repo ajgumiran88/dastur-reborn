@@ -13,6 +13,12 @@ describe('menu', () => {
     }
   });
 
+  it('adds Sauces & Extras as an eighth category so the tab row completes at four', () => {
+    expect(menuCategories).toHaveLength(8);
+    expect(menuCategories.at(-1)?.id).toBe('sauces');
+    expect(menuCategories.at(-1)?.dishes).toHaveLength(4);
+  });
+
   it('keeps English dish copy free of Arabic script', () => {
     for (const category of menuCategories) {
       for (const dish of category.dishes) {

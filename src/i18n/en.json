@@ -61,7 +61,8 @@
       "sides": "Sides & Starters",
       "desserts": "Desserts",
       "beverages": "Beverages",
-      "boxes": "Family & Sharing Boxes"
+      "boxes": "Family & Sharing Boxes",
+      "sauces": "Sauces & Extras"
     },
     "tags": {
       "vegetarian": "Vegetarian",
@@ -139,7 +140,7 @@
   },
   "delivery": {
     "eyebrow": "Delivery & Ordering",
-    "title": "Your Order, Your Dastur",
+    "title": "Order your Dastur",
     "body": "Reach us directly, or order through your preferred delivery platform.",
     "whatsapp": "Order via WhatsApp",
     "whatsappDesc": "Message us and we will guide your order personally.",

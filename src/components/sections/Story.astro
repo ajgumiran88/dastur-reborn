@@ -18,33 +18,19 @@ const symbols = [
 ];
 ---
 
-<Section id="story" theme="sand" labelledby="story-title" flush>
-  <div class="story">
-    <div class="story__backdrop" aria-hidden="true">
-      <Image
-        src={heritage}
-        alt=""
-        widths={[1200, 1600, 2000, 2400]}
-        sizes="100vw"
-        loading="lazy"
-        class="story__bg"
-      />
-      <div class="story__scrim"></div>
-    </div>
-
-    <div class="container story__content">
-      <div class="story__panel">
-        <p class="eyebrow" data-animate>
-          <Motif name="diamond" />{t(locale, 'story.eyebrow')}
-        </p>
-        <h2 class="story__title" id="story-title" data-animate data-animate-delay="60">
-          {t(locale, 'story.title')}
-        </h2>
-        <div class="story__body" data-animate data-animate-delay="120">
-          <p>{preventWidows(t(locale, 'story.p1'))}</p>
-          <p>{preventWidows(t(locale, 'story.p2'))}</p>
-          <p>{preventWidows(t(locale, 'story.p3'))}</p>
-        </div>
+<Section id="story" theme="sand" labelledby="story-title">
+  <div class="container story">
+    <div class="story__copy">
+      <p class="eyebrow" data-animate>
+        <Motif name="diamond" />{t(locale, 'story.eyebrow')}
+      </p>
+      <h2 class="story__title" id="story-title" data-animate data-animate-delay="60">
+        {t(locale, 'story.title')}
+      </h2>
+      <div class="story__body" data-animate data-animate-delay="120">
+        <p>{preventWidows(t(locale, 'story.p1'))}</p>
+        <p>{preventWidows(t(locale, 'story.p2'))}</p>
+        <p>{preventWidows(t(locale, 'story.p3'))}</p>
       </div>
 
       <div class="story__symbols" data-animate data-animate-delay="180">
@@ -63,64 +49,38 @@ const symbols = [
         </ul>
       </div>
     </div>
+
+    <figure class="story__media" data-animate data-animate-delay="80">
+      <Image
+        src={heritage}
+        alt={
+          locale === 'en'
+            ? 'Heritage waterfront with a dhow, wind towers, and a still life of bowl and vase'
+            : 'واجهة تراثية على الماء مع سفينة وبرج هواء ومائدة هادئة'
+        }
+        widths={[720, 1100, 1600, 2000]}
+        sizes="(max-width: 899px) 92vw, 48vw"
+        loading="lazy"
+        class="story__img"
+      />
+    </figure>
   </div>
 </Section>
 
 <style>
   .story {
-    position: relative;
-    isolation: isolate;
-    width: 100%;
-    min-height: clamp(36rem, 78vh, 50rem);
-    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
   }
 
-  .story__backdrop {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-  }
-
-  .story__backdrop :global(img),
-  .story__bg {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: 58% 72%;
-  }
-
-  .story__scrim {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background: linear-gradient(
-      102deg,
-      rgb(247 241 230 / 0.98) 0%,
-      rgb(247 241 230 / 0.95) 30%,
-      rgb(247 241 230 / 0.78) 48%,
-      rgb(247 241 230 / 0.35) 68%,
-      rgb(247 241 230 / 0.1) 100%
-    );
-  }
-
-  .story__content {
-    position: relative;
-    z-index: 2;
+  .story__copy {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    gap: clamp(1.75rem, 3vw, 2.5rem);
-    min-height: inherit;
-    padding-block: clamp(2.5rem, 5vw, 4.5rem);
-  }
-
-  .story__panel {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    max-width: min(46rem, 52%);
+    align-items: flex-start;
+    gap: 1.35rem;
+    min-width: 0;
   }
 
   .story__title {
@@ -142,15 +102,15 @@ const symbols = [
   }
 
   .story__symbols {
-    max-width: min(56rem, 64%);
-    padding-top: clamp(1.25rem, 2vw, 1.75rem);
+    width: 100%;
+    padding-top: clamp(1.1rem, 2vw, 1.6rem);
     border-top: 1px solid rgb(52 88 70 / 0.2);
   }
 
   .story__symbols ul {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: clamp(1rem, 2vw, 1.75rem);
+    grid-template-columns: 1fr;
+    gap: 1rem;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -190,27 +150,38 @@ const symbols = [
     line-height: 1.55;
   }
 
-  @media (max-width: 899px) {
+  .story__media {
+    position: relative;
+    margin: 0;
+    width: 100%;
+    min-width: 0;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background: #e4d8c6;
+  }
+
+  .story__media :global(img),
+  .story__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    object-fit: cover;
+    object-position: 68% 82%;
+  }
+
+  @media (min-width: 900px) {
     .story {
-      min-height: auto;
+      grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+      align-items: stretch;
+      gap: clamp(1.75rem, 4vw, 3.5rem);
     }
 
-    .story__scrim {
-      background: linear-gradient(
-        180deg,
-        rgb(247 241 230 / 0.97) 0%,
-        rgb(247 241 230 / 0.93) 55%,
-        rgb(247 241 230 / 0.82) 100%
-      );
-    }
-
-    .story__panel,
-    .story__symbols {
-      max-width: 100%;
-    }
-
-    .story__symbols ul {
-      grid-template-columns: 1fr;
+    .story__media {
+      height: 100%;
+      min-height: 32rem;
+      aspect-ratio: auto;
     }
   }
 </style>

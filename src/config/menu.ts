@@ -67,6 +67,10 @@ const dishImages: Record<string, string> = {
   'saffron-pudding': '/images/menu-food/dessert.jpg',
   'mint-tea': '/images/menu-food/tea.jpg',
   'grill-sharing-box': '/images/menu-food/grill.jpg',
+  dakkous: '/images/menu-food/stew.jpg',
+  toum: '/images/menu-food/salad.jpg',
+  'date-molasses': '/images/menu-food/coffee-dates.jpg',
+  'loomi-yogurt': '/images/menu-food/breakfast.jpg',
 };
 
 const d = (
@@ -171,6 +175,18 @@ export const menuCategories: MenuCategory[] = [
       d('majlis-box', 'Majlis Sharing Box', 'صندوق المجلس', 'Coffee, dates, luqaimat and savory bites for guests.', 'قهوة وتمر ولقيمات ولقمات مالحة للضيوف.', 149, ['vegetarian', 'contains-nuts']),
       d('breakfast-box', 'Emirati Breakfast Box', 'صندوق الفطور الإماراتي', 'Balaleet, regag, cheese, honey and karak for two.', 'بلاليط ورقاق وجبن وعسل وكرك لاثنين.', 96, ['vegetarian', 'dairy']),
       d('grill-sharing-box', 'Grill Sharing Box', 'صندوق المشاوي للمشاركة', 'Chicken skewers, lamb kofta, bread and dips for four.', 'أسياخ دجاج وكفتة وخبز ومقبلات لأربعة.', 219, []),
+    ],
+  },
+  {
+    id: 'sauces',
+    key: 'menu.categories.sauces',
+    accent: 'sand',
+    motif: 'diamond',
+    dishes: [
+      d('dakkous', 'Dakkous', 'دقوس', 'Emirati tomato and chili sauce, bright and slow-simmered.', 'صلصة طماطم وفلفل إماراتية، مشرقة ومطهوّة على مهل.', 8, ['vegan', 'spicy']),
+      d('toum', 'Garlic Toum', 'ثوم', 'Whipped garlic sauce to finish grills and bread.', 'صلصة ثوم مخفوقة تُكمّل المشاوي والخبز.', 8, ['vegan']),
+      d('date-molasses', 'Date Molasses', 'دبس التمر', 'Warm dibs for luqaimat, cheese, and the table.', 'دبس دافئ للقيمات والجبن والمائدة.', 10, ['vegan']),
+      d('loomi-yogurt', 'Loomi Yogurt', 'لبن باللومي', 'Cooling yogurt with dried lime and mint.', 'لبن منعش باللومي المجفف والنعناع.', 9, ['vegetarian', 'dairy']),
     ],
   },
 ];

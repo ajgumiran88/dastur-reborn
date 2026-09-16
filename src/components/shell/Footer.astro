@@ -19,9 +19,9 @@ const socials = site.socials.filter((s) => s.enabled);
 <footer id="contact" class="footer section--indigo">
   <div class="container footer__grid">
     <div class="footer__brand">
+      <p class="footer__taglineText">{t(locale, 'footer.tagline')}</p>
       <Emblem variant="lockup" tone="sand" locale={locale} class="footer__logo" />
       <p class="footer__statement measure--narrow">{preventWidows(t(locale, 'footer.statement'))}</p>
-      <p class="footer__taglineText">{t(locale, 'footer.tagline')}</p>
     </div>
 
     <div class="footer__col">
@@ -175,6 +175,7 @@ const socials = site.socials.filter((s) => s.enabled);
     align-items: center;
     text-align: center;
     grid-column: 1 / -1;
+    margin-bottom: clamp(1.75rem, 3.5vw, 3rem);
   }
   .footer :global(.footer__logo) {
     width: clamp(100px, 24vw, 128px);
@@ -182,7 +183,7 @@ const socials = site.socials.filter((s) => s.enabled);
     align-items: center;
   }
   .footer__taglineText {
-    margin-top: 0.35rem;
+    margin: 0 0 0.35rem;
   }
   [dir='rtl'] .footer :global(.footer__logo) {
     align-items: center;
