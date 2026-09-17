@@ -375,22 +375,22 @@ html[lang='en'] #delivery .del__title { letter-spacing: 0.045em; line-height: 1.
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  min-height: 100dvh;
-  height: 100dvh;
-  max-height: 100dvh;
+  min-height: 0;
+  height: auto;
+  max-height: none;
   padding-block: 0 !important;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
-  scroll-margin-top: calc(-1 * (var(--nav-h) + 1rem));
+  overflow: visible;
+  scroll-margin-top: 0;
 }
 
 #story > .section__content {
   flex: 1 1 auto;
   min-height: 0;
   display: flex;
-  align-items: stretch;
-  padding-block: calc(var(--nav-h) + 0.45rem) 0;
+  align-items: flex-start;
+  padding-block: calc(var(--nav-h) + 0.35rem) 2.25rem;
 }
 
 #story .story {
@@ -398,18 +398,19 @@ html[lang='en'] #delivery .del__title { letter-spacing: 0.045em; line-height: 1.
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr);
   align-items: stretch;
   gap: clamp(1rem, 2.4vw, 2.25rem);
-  flex: 1 1 auto;
+  flex: 0 1 auto;
   min-height: 0;
-  height: 100%;
+  height: auto;
   width: 100%;
 }
 
 #story .story__copy {
   min-width: 0;
   min-height: 0;
+  height: auto;
   padding-top: 0;
   gap: clamp(0.4rem, 1.1dvh, 0.75rem);
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 #story .story__title {
@@ -431,8 +432,9 @@ html[lang='en'] #story .story__title {
 }
 
 #story .story__symbols {
-  margin-top: 0;
-  padding-top: clamp(0.4rem, 1.1dvh, 0.7rem);
+  margin-top: 0.15rem;
+  padding-top: clamp(0.55rem, 1.3dvh, 0.85rem);
+  width: 100%;
 }
 
 #story .story__symbols ul {
@@ -442,8 +444,11 @@ html[lang='en'] #story .story__title {
 #story .story__media {
   width: 100%;
   min-width: 0;
-  min-height: 0;
+  min-height: 100%;
   height: auto;
+  max-height: none;
+  margin-block-start: 0;
+  align-self: stretch;
   aspect-ratio: auto;
   background: #e4d8c6;
 }
@@ -451,7 +456,7 @@ html[lang='en'] #story .story__title {
 #story .story__img,
 #story .story__media img {
   object-fit: cover;
-  object-position: 68% 82%;
+  object-position: 62% 68%;
 }
 
 #story [data-animate],
@@ -698,7 +703,16 @@ html[lang='en'] #why .why__itemTitle { letter-spacing: 0.035em; }
     padding-block: calc(var(--nav-h) + 1rem) 2.5rem;
   }
   #story .story { grid-template-columns: 1fr; height: auto; }
-  #story .story__media { aspect-ratio: 16 / 10; min-height: 0; }
+  #story .story__copy { height: auto; }
+  #story .story__symbols { margin-top: 0; }
+  #story .story__media {
+    height: auto;
+    max-height: none;
+    margin-block-start: 0;
+    align-self: auto;
+    aspect-ratio: 16 / 10;
+    min-height: 0;
+  }
   #packaging .pkg,
   #why .why { grid-template-columns: 1fr; }
   #packaging .pkg__accent { display: none; }

@@ -26,12 +26,15 @@ describe('vertical section rhythm', () => {
     expect(framingSectionRule).toMatch(/min-height:\s*100dvh/);
   });
 
-  it('fits Our Story in one desktop viewport', () => {
+  it('sizes Our Story to its content instead of a locked viewport', () => {
     const body = ruleBody('#story');
-    expect(body).toMatch(/min-height:\s*100dvh/);
-    expect(body).toMatch(/height:\s*100dvh/);
-    expect(body).toMatch(/max-height:\s*100dvh/);
-    expect(body).toMatch(/overflow:\s*hidden/);
+    const media = ruleBody('#story .story__media');
+    expect(body).toMatch(/height:\s*auto/);
+    expect(body).not.toMatch(/height:\s*100dvh/);
+    expect(body).toMatch(/overflow:\s*visible/);
+    expect(media).toMatch(/height:\s*auto/);
+    expect(media).toMatch(/align-self:\s*stretch/);
+    expect(ruleBody('#story .story__symbols')).not.toMatch(/margin-top:\s*auto/);
   });
 
   it('uses solid backgrounds for dark sections instead of transition gradients', () => {
