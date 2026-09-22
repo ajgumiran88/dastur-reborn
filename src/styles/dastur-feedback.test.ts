@@ -33,9 +33,10 @@ describe('Dastur feedback refactor', () => {
 
   it('places the logo at the start of the navigation header', () => {
     expect(nav).toMatch(/class="nav__brand" href="#home"/);
-    expect(nav).toMatch(/src="\/images\/dastur-story-logo\.png"/);
+    expect(nav).toMatch(/src="\/images\/dastur-logo-ivory@2x\.png"/);
     expect(nav).toMatch(/alt="DASTUR"/);
-    expect(nav).toMatch(/\.nav__brand\s*{[\s\S]*?height:\s*76px;/);
+    expect(nav).toMatch(/\.nav__brand img\s*{[\s\S]*?height:\s*64px;/);
+    expect(nav).not.toMatch(/\.nav__brand\s*{[^}]*overflow:\s*hidden/);
     expect(hero).not.toMatch(/hero__logo/);
   });
 
