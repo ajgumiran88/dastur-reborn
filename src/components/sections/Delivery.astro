@@ -256,6 +256,11 @@ const facts = [
     background: rgb(5 39 31 / 0.65);
   }
   .del__fact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
     padding: 0.35rem 1rem;
     text-align: center;
     border-inline-end: 1px solid color-mix(in srgb, var(--brass-300) 22%, transparent);
@@ -264,11 +269,16 @@ const facts = [
     border-inline-end: 0;
   }
   .del__fact dt {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.1em;
     font-size: 0.64rem;
+    font-weight: 700;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--brass-300);
-    margin-bottom: 0.3rem;
+    margin-bottom: 0;
   }
   [lang='ar'] .del__fact dt {
     letter-spacing: 0.02em;
@@ -276,7 +286,7 @@ const facts = [
   .del__fact dd {
     margin: 0;
     color: var(--sand);
-    font-size: var(--fs-small);
+    font-size: var(--brand-supporting-size);
   }
   .del__fact a:hover {
     text-decoration: underline;
@@ -295,6 +305,7 @@ const facts = [
     .del__platformGrid { grid-template-columns: 1fr; }
     .del__factGrid { grid-template-columns: 1fr; padding: 0.5rem 1rem; }
     .del__fact { padding: 0.8rem 0; border-inline-end: 0; border-bottom: 1px solid color-mix(in srgb, var(--brass-300) 18%, transparent); }
+    .del__fact dt { min-height: 0; }
     .del__fact:last-child { border-bottom: 0; }
     .path__desc { display: none; }
   }

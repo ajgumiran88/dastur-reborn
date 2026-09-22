@@ -134,10 +134,15 @@ const orderIsExternal = orderLink.startsWith('http');
     flex-direction: column;
     align-items: flex-start;
     gap: 1.5rem;
+    padding-block-start: clamp(5.25rem, 11vw, 7.5rem);
   }
   .hero__logo {
-    width: clamp(112px, 20vw, 150px);
-    height: clamp(112px, 20vw, 150px);
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-end: 0;
+    width: clamp(96px, 12vw, 150px);
+    height: auto;
+    aspect-ratio: 3 / 2;
     object-fit: contain;
     object-position: center;
   }
@@ -150,10 +155,11 @@ const orderIsExternal = orderLink.startsWith('http');
     color: var(--brass-300);
   }
   .hero__title {
-    font-size: clamp(1.125rem, 4vw, 3rem);
+    font-size: clamp(2.25rem, 4vw, 3rem);
     line-height: 1.02;
-    max-width: none;
-    white-space: nowrap;
+    max-width: 18ch;
+    white-space: normal;
+    text-wrap: balance;
     color: var(--sand);
     font-weight: 500;
   }
@@ -217,9 +223,10 @@ const orderIsExternal = orderLink.startsWith('http');
     }
   }
 
-  @media (min-width: 700px) {
+  @media (min-width: 1100px) {
     .hero__title {
-      max-width: 18ch;
+      max-width: none;
+      white-space: nowrap;
     }
   }
 </style>

@@ -232,7 +232,7 @@ html[lang='ar'] .drawer__num {
 }
 
 #delivery .del__fact dd {
-  font-size: var(--fs-small);
+  font-size: var(--brand-supporting-size);
   color: var(--sand);
 }
 

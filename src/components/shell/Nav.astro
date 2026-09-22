@@ -275,6 +275,15 @@ const orderIsExternal = orderHrefValue.startsWith('http');
   }
   .nav__order {
     display: none;
+    border: 1px solid var(--sand);
+    box-shadow: none;
+  }
+  .nav__order:hover,
+  .nav__order:active {
+    transform: none;
+  }
+  .nav__order:active {
+    background: color-mix(in srgb, var(--palm) 68%, var(--sand));
   }
 
   .nav__toggle {

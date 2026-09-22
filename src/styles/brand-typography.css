@@ -3,7 +3,9 @@
    Preserve all content, spacing, surfaces, images, and layout rules. */
 :root {
   --brand-heading-size: clamp(2.15rem, 3.6vw, 3.65rem);
-  --brand-copy-size: clamp(1rem, 0.94rem + 0.28vw, 1.125rem);
+  --brand-subheading-size: clamp(1rem, 0.96rem + 0.2vw, 1.1rem);
+  --brand-supporting-size: clamp(0.875rem, 0.84rem + 0.15vw, 0.95rem);
+  --brand-copy-size: var(--brand-subheading-size);
   --brand-label-size: clamp(0.8rem, 0.76rem + 0.16vw, 0.9rem);
 }
 
@@ -15,7 +17,7 @@ html[lang='en'] .vertical-scroll :is(h1, h2, h3, h4),
 html[lang='en'] #gallery .gal__label,
 html[lang='en'] #why .why__tagline p {
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: 700;
 }
 
 html[lang='ar'] .vertical-scroll :is(h1, h2, h3, h4) {
@@ -40,6 +42,7 @@ html[lang='ar'] .vertical-scroll :is(h1, h2, h3, h4) {
 #experience .exp__title, #packaging .pkg__title, #gallery .gal__title,
 #why .why__title {
   font-size: var(--brand-heading-size);
+  font-weight: 700;
 }
 
 #home .hero__title { color: var(--palm); }
@@ -75,11 +78,15 @@ html[lang='ar'] .vertical-scroll :is(h1, h2, h3, h4) {
   font-size: clamp(1.15rem, 1rem + 0.6vw, 1.5rem);
 }
 
-#menu .menu__intro, #menu .dish__desc, #story .story__body,
-#story .symbol__desc, #experience .exp__stepDesc, #packaging .pkg__body,
+#menu .menu__intro, #story .story__body, #experience .exp__intro,
+#packaging .pkg__body, #why .why__intro {
+  font-size: var(--brand-subheading-size);
+}
+
+#menu .dish__desc, #story .symbol__desc, #experience .exp__stepDesc,
 #packaging .pkg__points li, #why .why__itemDesc,
 #contact .footer__statement, #contact .footer__list {
-  font-size: var(--brand-copy-size);
+  font-size: var(--brand-supporting-size);
 }
 
 #menu .dish__details, #menu .menu__tab, #menu .menu__demo,

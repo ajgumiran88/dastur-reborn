@@ -107,9 +107,7 @@ const symbols = [
 
   .story__symbols {
     width: 100%;
-    margin-top: 0;
-    padding-top: 0.7rem;
-    border-top: 1px solid rgb(52 88 70 / 0.2);
+    margin-top: clamp(1.5rem, 3vw, 2.5rem);
   }
 
   .story__symbols ul {
@@ -126,6 +124,10 @@ const symbols = [
     gap: 0.7rem;
     align-items: flex-start;
     min-width: 0;
+    padding: 1rem;
+    border: 1px solid rgb(52 88 70 / 0.16);
+    border-radius: var(--r-sm);
+    background: rgb(255 255 255 / 0.3);
   }
 
   .symbol__ico {
