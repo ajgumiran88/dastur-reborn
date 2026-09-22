@@ -31,9 +31,10 @@ describe('Dastur feedback refactor', () => {
     );
   });
 
-  it('anchors the hero logo in the upper-right corner', () => {
+  it('places the hero logo on the right, vertically centered', () => {
+    expect(hero).toMatch(/src="\/images\/dastur-story-logo\.png"/);
     expect(hero).toMatch(
-      /\.hero__logo\s*{[\s\S]*?position:\s*absolute;[\s\S]*?inset-block-start:\s*0;[\s\S]*?inset-inline-end:\s*0;/,
+      /\.hero__logo\s*{[\s\S]*?position:\s*absolute;[\s\S]*?inset-inline-end:[\s\S]*?top:\s*50%;[\s\S]*?translateY\(-50%\)/,
     );
   });
 

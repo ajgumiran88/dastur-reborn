@@ -16,14 +16,16 @@ function ruleBody(selector: string): string {
 }
 
 describe('vertical section rhythm', () => {
-  it('reserves full-viewport height for the opening and closing sections', () => {
+  it('reserves full-viewport height for the opening section', () => {
     const sharedSectionRule = ruleBody(
       '.vertical-scroll > section,\n.vertical-scroll > footer',
     );
-    const framingSectionRule = ruleBody('#home,\n#contact');
+    const homeRule = ruleBody('#home {');
 
     expect(sharedSectionRule).not.toMatch(/min-height:\s*100dvh/);
-    expect(framingSectionRule).toMatch(/min-height:\s*100dvh/);
+    expect(homeRule).toMatch(/min-height:\s*100dvh/);
+    expect(ruleBody('#contact {')).not.toMatch(/min-height:\s*100dvh/);
+    expect(ruleBody('#contact {')).toMatch(/justify-content:\s*flex-start/);
   });
 
   it('sizes Our Story to its content instead of a locked viewport', () => {

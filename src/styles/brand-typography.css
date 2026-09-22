@@ -74,7 +74,7 @@ html[lang='ar'] .vertical-scroll :is(h1, h2, h3, h4) {
 #menu .menu__tab[aria-selected='true'] { color: var(--sand); }
 
 #menu .dish__name, #story .symbol__title,
-#experience .exp__stepTitle, #why .why__itemTitle {
+#why .why__itemTitle {
   font-size: clamp(1.15rem, 1rem + 0.6vw, 1.5rem);
 }
 
@@ -90,8 +90,12 @@ html[lang='ar'] .vertical-scroll :is(h1, h2, h3, h4) {
 }
 
 #menu .dish__details, #menu .menu__tab, #menu .menu__demo,
-#delivery .del__fact dt, .vertical-scroll .eyebrow {
+.vertical-scroll .eyebrow {
   font-size: var(--brand-label-size);
+}
+
+#delivery .del__fact dt {
+  font-size: 0.7rem;
 }
 
 #menu .dish__amount, #delivery .path__title,

@@ -38,8 +38,7 @@ body {
   padding-block: clamp(5.5rem, 9vh, 7rem) clamp(4.5rem, 7vh, 5.75rem) !important;
 }
 
-#home,
-#contact {
+#home {
   min-height: 100dvh;
 }
 
@@ -110,7 +109,7 @@ html.animate-ready .vertical-scroll [data-animate].is-inview {
   --text-muted: #624b3d;
   --border: rgb(52 88 70 / 0.38);
   isolation: isolate;
-  align-items: flex-end;
+  align-items: center;
   color: var(--text);
   background-color: #d8cabb;
   background-image:
@@ -131,7 +130,7 @@ html.animate-ready .vertical-scroll [data-animate].is-inview {
 
 #home .hero__inner {
   gap: 1.15rem;
-  padding-block-end: clamp(2rem, 9vh, 7rem);
+  padding-block: 0;
 }
 
 #home .hero__title {
@@ -172,6 +171,13 @@ html.animate-ready .vertical-scroll [data-animate].is-inview {
 #home .btn--ghost:hover {
   color: #263f34;
   border-color: #345846;
+}
+
+#home .btn--ghost:active,
+#home .btn--ghost:hover:active {
+  background: color-mix(in srgb, var(--sand) 72%, white);
+  color: #345846;
+  transform: translateY(0);
 }
 
 /* 02 — Menu as a contemporary printed bill of fare. */
@@ -347,7 +353,7 @@ html[lang='en'] #delivery .del__title { letter-spacing: 0.045em; line-height: 1.
   grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 0;
   max-width: none;
-  padding: 1.35rem 0;
+  padding: 0.65rem 0;
   border: 1px solid color-mix(in srgb, var(--brass-300) 48%, transparent);
   border-radius: 18px;
   background: rgb(5 39 31 / 0.65);
@@ -356,10 +362,10 @@ html[lang='en'] #delivery .del__title { letter-spacing: 0.045em; line-height: 1.
 #delivery .del__fact {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  min-height: 112px;
-  padding: 0.35rem 1rem;
+  min-height: 0;
+  padding: 0.35rem 0.85rem;
   text-align: center;
   border-inline-end: 1px solid color-mix(in srgb, var(--brass-300) 22%, transparent);
 }
@@ -611,8 +617,8 @@ html[lang='en'] #why .why__itemTitle { letter-spacing: 0.035em; }
   background-color: var(--palm);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding-block: clamp(7rem, 12vh, 10rem) clamp(6rem, 12vh, 10rem) !important;
+  justify-content: flex-start;
+  padding-block: clamp(3rem, 5vh, 4rem) 1.5rem !important;
 }
 
 #contact .footer__grid { gap: clamp(3rem, 5vw, 5rem) clamp(1.5rem, 4vw, 4rem); }
@@ -637,10 +643,10 @@ html[lang='en'] #why .why__itemTitle { letter-spacing: 0.035em; }
   max-width: 18px;
 }
 #contact .footer__meta { margin-top: 0.8rem; gap: 0.5rem; }
-#contact .footer__allergen { margin-top: 1rem; padding-top: 0.75rem; max-width: none; white-space: nowrap; font-size: clamp(0.78rem, 0.9vw, 0.88rem); }
+#contact .footer__allergen { margin-top: 1.25rem; padding-top: 0.7rem; max-width: none; white-space: nowrap; font-size: clamp(0.78rem, 0.9vw, 0.88rem); }
 #contact .footer__tagline { margin-block: 1rem; padding-block: 0; gap: 0.5rem; }
 #contact .footer__taglineText { font-size: clamp(1.8rem, 2.6vw, 3.4rem); font-weight: 700; letter-spacing: 0.06em; line-height: 1.15; }
-#contact .footer__bottom { padding-top: 0.75rem; }
+#contact .footer__bottom { margin-top: 0.85rem; padding-top: 0.7rem; }
 
 @media (min-width: 960px) {
   #contact .footer__grid {
@@ -659,12 +665,11 @@ html[lang='en'] #why .why__itemTitle { letter-spacing: 0.035em; }
   }
 
   #home {
-    align-items: flex-start;
+    align-items: center;
   }
 
   #home .hero__inner {
-    padding-block-start: clamp(5.25rem, 18vw, 7rem);
-    padding-block-end: 2rem;
+    padding-block: 0;
   }
 
   #menu .container {

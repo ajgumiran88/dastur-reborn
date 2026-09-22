@@ -281,9 +281,14 @@ const orderIsExternal = orderHrefValue.startsWith('http');
   .nav__order:hover,
   .nav__order:active {
     transform: none;
+    color: var(--palm-700);
   }
-  .nav__order:active {
-    background: color-mix(in srgb, var(--palm) 68%, var(--sand));
+  .nav__order:hover {
+    background: color-mix(in srgb, var(--palm) 38%, var(--sand));
+  }
+  .nav__order:active,
+  .nav__order:hover:active {
+    background: color-mix(in srgb, var(--palm) 24%, var(--sand));
   }
 
   .nav__toggle {

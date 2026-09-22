@@ -88,10 +88,14 @@ const extra = external ? { target: '_blank', rel: 'noopener noreferrer' } : {};
     box-shadow: var(--shadow-md);
   }
   .btn--primary:hover {
-    background: var(--palm-400);
+    background: color-mix(in srgb, var(--palm) 38%, var(--sand));
+    color: var(--palm-700);
     transform: translateY(-2px);
   }
-  .btn--primary:active {
+  .btn--primary:active,
+  .btn--primary:hover:active {
+    background: color-mix(in srgb, var(--palm) 24%, var(--sand));
+    color: var(--palm-700);
     transform: translateY(0);
   }
 
