@@ -25,14 +25,6 @@ const orderIsExternal = orderLink.startsWith('http');
     </div>
   </div>
 
-  <img
-    class="hero__logo"
-    src="/images/dastur-story-logo.png"
-    alt="DASTUR"
-    width="1536"
-    height="1024"
-  />
-
   <div class="container hero__inner">
     <p class="eyebrow hero__eyebrow" data-animate data-animate-delay="0">
       <Motif name="diamond" />{t(locale, 'hero.eyebrow')}
@@ -134,18 +126,6 @@ const orderIsExternal = orderLink.startsWith('http');
     align-items: flex-start;
     gap: 1.5rem;
   }
-  .hero__logo {
-    position: absolute;
-    z-index: 1;
-    inset-inline-end: clamp(1.5rem, 6vw, 5rem);
-    top: 50%;
-    transform: translateY(-50%);
-    width: clamp(140px, 18vw, 260px);
-    height: auto;
-    object-fit: contain;
-    object-position: center;
-    pointer-events: none;
-  }
   .hero__eyebrow {
     color: var(--brass-300);
   }
@@ -220,16 +200,6 @@ const orderIsExternal = orderLink.startsWith('http');
       100% {
         transform: translateY(200%);
       }
-    }
-  }
-
-  @media (max-width: 899px) {
-    .hero__logo {
-      inset-inline-end: 1rem;
-      top: calc(var(--nav-h) + 0.75rem);
-      transform: none;
-      width: clamp(88px, 28vw, 120px);
-      opacity: 0.92;
     }
   }
 

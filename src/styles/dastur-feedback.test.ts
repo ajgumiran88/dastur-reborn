@@ -31,11 +31,12 @@ describe('Dastur feedback refactor', () => {
     );
   });
 
-  it('places the hero logo on the right, vertically centered', () => {
-    expect(hero).toMatch(/src="\/images\/dastur-story-logo\.png"/);
-    expect(hero).toMatch(
-      /\.hero__logo\s*{[\s\S]*?position:\s*absolute;[\s\S]*?inset-inline-end:[\s\S]*?top:\s*50%;[\s\S]*?translateY\(-50%\)/,
-    );
+  it('places the logo at the start of the navigation header', () => {
+    expect(nav).toMatch(/class="nav__brand" href="#home"/);
+    expect(nav).toMatch(/src="\/images\/dastur-story-logo\.png"/);
+    expect(nav).toMatch(/alt="DASTUR"/);
+    expect(nav).toMatch(/\.nav__brand\s*{[\s\S]*?height:\s*76px;/);
+    expect(hero).not.toMatch(/hero__logo/);
   });
 
   it('gives the header order button a white outline and lighter pressed state', () => {

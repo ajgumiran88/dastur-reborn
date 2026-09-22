@@ -16,6 +16,9 @@ const orderIsExternal = orderHrefValue.startsWith('http');
 
 <header class="nav" data-nav>
   <div class="nav__bar container">
+    <a class="nav__brand" href="#home">
+      <img src="/images/dastur-story-logo.png" alt="DASTUR" width="1402" height="1122" />
+    </a>
     <nav class="nav__links" aria-label="Primary">
       <ul role="list">
         {
@@ -219,21 +222,46 @@ const orderIsExternal = orderHrefValue.startsWith('http');
     gap: 1.5rem;
     min-height: var(--nav-h);
   }
+  .nav__brand {
+    display: block;
+    flex: 0 0 auto;
+    height: 76px;
+    overflow: hidden;
+    line-height: 0;
+  }
+  .nav__brand img {
+    display: block;
+    height: 90px;
+    width: auto;
+    max-width: none;
+    margin-block-start: -4px;
+    filter: brightness(0) invert(1);
+    opacity: 0.94;
+  }
+  .nav__brand:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+  }
   .nav__links {
     display: none;
   }
   .nav__links ul {
     display: flex;
-    gap: clamp(1rem, 2vw, 2.1rem);
+    align-items: center;
+    gap: clamp(0.9rem, 1.9vw, 2.25rem);
     list-style: none;
     margin: 0;
     padding: 0;
   }
   .nav__link {
     position: relative;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    white-space: nowrap;
+    line-height: 1;
     font-size: var(--fs-small);
     letter-spacing: 0.04em;
-    padding-block: 0.5rem;
     color: currentColor;
     opacity: 0.85;
     transition: opacity var(--dur-1) var(--ease-out);
@@ -244,7 +272,7 @@ const orderIsExternal = orderHrefValue.startsWith('http');
   .nav__link::after {
     content: '';
     position: absolute;
-    inset-block-end: 0;
+    inset-block-end: 8px;
     inset-inline-start: 0;
     width: 100%;
     height: 1px;
@@ -272,11 +300,20 @@ const orderIsExternal = orderHrefValue.startsWith('http');
   }
   .nav__lang {
     display: none;
+    min-height: 44px;
+    line-height: 1;
   }
   .nav__order {
     display: none;
     border: 1px solid var(--sand);
     box-shadow: none;
+    white-space: nowrap;
+    flex: 0 0 auto;
+    min-height: 44px;
+    padding: 0.9em 1.6em;
+    font-size: 0.76rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
   }
   .nav__order:hover,
   .nav__order:active {
@@ -412,9 +449,29 @@ const orderIsExternal = orderHrefValue.startsWith('http');
   }
 
   /* --- Desktop --- */
-  @media (min-width: 900px) {
+  @media (min-width: 1080px) {
+    .nav__bar {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      align-items: center;
+      column-gap: clamp(1.5rem, 3vw, 3rem);
+    }
+    .nav__brand {
+      justify-self: start;
+      width: max-content;
+    }
     .nav__links {
       display: block;
+      justify-self: center;
+    }
+    .nav__actions {
+      justify-self: end;
+      gap: 1.5rem;
+    }
+    .nav__lang {
+      padding-inline-end: 1.5rem;
+      border-inline-end: 1px solid color-mix(in srgb, currentColor 28%, transparent);
+      min-height: 24px;
     }
     .nav__lang {
       display: inline-flex;
