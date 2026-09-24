@@ -13,6 +13,8 @@ interface Props {
 const { locale } = Astro.props;
 const orderLink = orderHref(locale);
 const orderIsExternal = orderLink.startsWith('http');
+const heroTitle = t(locale, 'hero.title');
+const heroTitleLines = locale === 'en' ? ['Ancient Emirati Recipes,', 'Modern Plates'] : [heroTitle];
 ---
 
 <section id="home" class="hero section--oud" aria-labelledby="hero-title">
@@ -30,7 +32,9 @@ const orderIsExternal = orderLink.startsWith('http');
       <Motif name="diamond" />{t(locale, 'hero.eyebrow')}
     </p>
     <h1 id="hero-title" class="hero__title" data-animate data-animate-delay="80">
-      {t(locale, 'hero.title')}
+      {heroTitleLines.map((line) => (
+        <span class="hero__titleLine">{line}</span>
+      ))}
     </h1>
     <p class="lead hero__lead measure" data-animate data-animate-delay="160">
       {preventWidows(t(locale, 'hero.body'))}
