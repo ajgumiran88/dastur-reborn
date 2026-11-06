@@ -9,8 +9,10 @@ import Nav from '@/components/shell/Nav.astro';
 import Footer from '@/components/shell/Footer.astro';
 
 import Hero from '@/components/sections/Hero.astro';
+import SignatureDishes from '@/components/sections/SignatureDishes.astro';
 import Story from '@/components/sections/Story.astro';
 import Menu from '@/components/sections/Menu.astro';
+import Serving from '@/components/sections/Serving.astro';
 import Experience from '@/components/sections/Experience.astro';
 import Packaging from '@/components/sections/Packaging.astro';
 import WhyDastur from '@/components/sections/WhyDastur.astro';
@@ -31,7 +33,9 @@ const { locale } = Astro.props;
 
   <div class="vertical-scroll">
     <Hero locale={locale} />
+    <SignatureDishes locale={locale} />
     <Menu locale={locale} />
+    <Serving locale={locale} />
     <Delivery locale={locale} />
     <Story locale={locale} />
     <Experience locale={locale} />

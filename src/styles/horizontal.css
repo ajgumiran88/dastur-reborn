@@ -407,24 +407,16 @@ html[lang='en'] #delivery .del__title { letter-spacing: 0.045em; line-height: 1.
   padding-block: calc(var(--nav-h) + 0.35rem) 2.25rem;
 }
 
-#story .story {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr);
-  align-items: stretch;
-  gap: clamp(1rem, 2.4vw, 2.25rem);
-  flex: 0 1 auto;
-  min-height: 0;
-  height: auto;
-  width: 100%;
+#story .story__content.container {
+  max-width: 1560px;
+  width: 78%;
+  padding-inline: 0;
 }
 
-#story .story__copy {
-  min-width: 0;
-  min-height: 0;
-  height: auto;
-  padding-top: 0;
-  gap: clamp(0.4rem, 1.1dvh, 0.75rem);
-  justify-content: flex-start;
+@media (max-width: 899px) {
+  #story .story__content.container {
+    width: calc(100% - 2.5rem);
+  }
 }
 
 #story .story__title {

@@ -80,9 +80,9 @@ describe('Dastur feedback refactor', () => {
     );
   });
 
-  it('uses the header green in the footer, removes the logo, and reduces supporting text', () => {
+  it('keeps the branded footer logo and compact supporting text', () => {
     expect(footer).toContain('class="footer section--palm"');
-    expect(footer).not.toContain('class="footer__logo"');
+    expect(footer).toContain('class="footer__logo"');
     expect(footer).toMatch(
       /\.footer__statement\s*{[\s\S]*?font-size:\s*var\(--brand-supporting-size\);/,
     );

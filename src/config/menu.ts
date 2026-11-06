@@ -39,6 +39,10 @@ export interface MenuCategory {
 
 const AED = 'AED';
 const dishImages: Record<string, string> = {
+  'garlic-sauce': '/images/menu-food/garlic-sauce.webp',
+  'loomi-sauce': '/images/menu-food/loomi-sauce.webp',
+  'chilli-sauce': '/images/menu-food/chilli-sauce.webp',
+  'yogurt-mint': '/images/menu-food/yogurt-mint.webp',
   'machboos-laham': '/images/menu-food/rice.jpg',
   'machboos-robyan': '/images/menu-food/rice.jpg',
   'biryani-dajaj': '/images/menu-food/rice.jpg',
@@ -180,13 +184,13 @@ export const menuCategories: MenuCategory[] = [
   {
     id: 'sauces',
     key: 'menu.categories.sauces',
-    accent: 'sand',
+    accent: 'oud',
     motif: 'diamond',
     dishes: [
-      d('dakkous', 'Dakkous', 'دقوس', 'Emirati tomato and chili sauce, bright and slow-simmered.', 'صلصة طماطم وفلفل إماراتية، مشرقة ومطهوّة على مهل.', 8, ['vegan', 'spicy']),
-      d('toum', 'Garlic Toum', 'ثوم', 'Whipped garlic sauce to finish grills and bread.', 'صلصة ثوم مخفوقة تُكمّل المشاوي والخبز.', 8, ['vegan']),
-      d('date-molasses', 'Date Molasses', 'دبس التمر', 'Warm dibs for luqaimat, cheese, and the table.', 'دبس دافئ للقيمات والجبن والمائدة.', 10, ['vegan']),
-      d('loomi-yogurt', 'Loomi Yogurt', 'لبن باللومي', 'Cooling yogurt with dried lime and mint.', 'لبن منعش باللومي المجفف والنعناع.', 9, ['vegetarian', 'dairy']),
+      d('garlic-sauce', 'Garlic Sauce', 'صلصة الثوم', 'A smooth garlic dip to accompany your favourite grills.', 'صلصة ثوم ناعمة ترافق المشاوي المفضلة لديك.', 5, []),
+      d('loomi-sauce', 'Loomi Sauce', 'صلصة اللومي', 'A tangy dried-lime sauce for rice dishes and grilled fish.', 'صلصة ليمون مجفف حامضة للأرز والسمك المشوي.', 5, []),
+      d('chilli-sauce', 'Chilli Sauce', 'صلصة الفلفل الحار', 'A fiery chilli sauce for an extra touch of heat.', 'صلصة فلفل حار لإضافة نكهة حارة.', 5, ['spicy']),
+      d('yogurt-mint', 'Mint Yogurt Dip', 'صلصة الزبادي بالنعناع', 'Cooling yogurt and fresh mint, served on the side.', 'زبادي منعش مع نعناع طازج يقدم جانباً.', 6, ['dairy']),
     ],
   },
 ];

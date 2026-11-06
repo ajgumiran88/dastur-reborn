@@ -1,0 +1,81 @@
+---
+import { menuCategories } from '@/config/menu';
+import { t, type Locale } from '@/lib/i18n';
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const ids = ['mixed-grill', 'machboos-laham', 'samak-mashwi'];
+const dishes = ids.map(id => menuCategories.flatMap(c => c.dishes).find(d => d.id === id)!);
+const arabic = locale === 'ar';
+---
+<section id="signatures" class="signatures" aria-labelledby="signatures-title">
+  <div class="signatures__stars" aria-hidden="true">
+    {Array.from({ length: 36 }, (_, i) => <i style={`left:${(i * 37 + 7) % 100}%;top:${(i * 23 + 11) % 100}%;opacity:${.15 + (i % 4) * .12}`} />)}
+  </div>
+  <div class="signatures__heading">
+    <p class="eyebrow">{t(locale, 'menu.eyebrow')}</p>
+    <h2 id="signatures-title">{arabic ? 'من تراثنا،' : 'Rooted in heritage.'}<br /><span>{arabic ? 'إلى مائدتكم.' : 'Made for your table.'}</span></h2>
+  </div>
+  <div class="signatures__stage" aria-label={arabic ? 'أطباق دستور المميزة' : 'DASTUR signature dishes'}>
+    {dishes.map((dish, i) => (
+      <a class="signature-plate" data-slot={i} href="#menu" aria-label={dish.name[locale]}>
+        <div class="signature-plate__rim"><img src={dish.image} alt="" width="600" height="600" loading="lazy" /></div>
+        <span>{dish.name[locale]}</span>
+      </a>
+    ))}
+  </div>
+  <div class="signatures__controls">
+    <button type="button" data-signature-prev aria-label={arabic ? 'الطبق السابق' : 'Previous dish'}>←</button>
+    <a href="#menu">{t(locale, 'nav.menu')} <span aria-hidden="true">↗</span></a>
+    <button type="button" data-signature-next aria-label={arabic ? 'الطبق التالي' : 'Next dish'}>→</button>
+  </div>
+  <p class="sr-only" data-signature-status aria-live="polite" aria-atomic="true"></p>
+</section>
+<script>
+  const section = document.getElementById('signatures');
+  if (section) {
+    const plates = Array.from(section.querySelectorAll<HTMLElement>('.signature-plate'));
+    const move = (direction: number) => {
+      plates.forEach(plate => { plate.dataset.slot = String((Number(plate.dataset.slot) + direction + 3) % 3); });
+      const active = plates.find(plate => plate.dataset.slot === '1');
+      section.querySelector('[data-signature-status]')!.textContent = active?.getAttribute('aria-label') || '';
+    };
+    section.querySelector('[data-signature-prev]')?.addEventListener('click', () => move(1));
+    section.querySelector('[data-signature-next]')?.addEventListener('click', () => move(-1));
+    const observer = new IntersectionObserver(entries => {
+      if (entries.some(entry => entry.isIntersecting)) { section.classList.add('has-entered'); observer.disconnect(); }
+    }, { threshold: .15 });
+    observer.observe(section);
+  }
+</script>
+<style>
+  #signatures.signatures { position: relative; isolation: isolate; overflow: hidden; background: #101a2b; color: #f3ecdf; padding: clamp(3rem, 6vw, 6rem) 0 2.5rem; }
+  .signatures__stars { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+  .signatures__stars i { position: absolute; width: 2px; height: 2px; border-radius: 50%; background: #c5a16b; }
+  .signatures__heading { text-align: center; padding-inline: 1.25rem; }
+  .signatures__heading .eyebrow { color: #c5a16b; justify-content: center; margin-bottom: 1rem; }
+  #signatures h2 { font-size: clamp(2.1rem, 4.2vw, 4.5rem); line-height: 1.12; color: #f3ecdf; font-weight: 400; }
+  #signatures h2 span { color: #c5a16b; }
+  .signatures__stage { position: relative; height: clamp(290px, 43vw, 620px); margin-top: clamp(2rem, 5vw, 5rem); }
+  .signature-plate { position: absolute; top: 0; left: 50%; width: min(40vw, 520px); text-align: center; color: #f3ecdf; transition: transform 850ms cubic-bezier(.2,.7,.2,1), opacity 850ms; }
+  .signature-plate[data-slot='0'] { transform: translate(-165%, 12%) scale(.82) rotate(-14deg); opacity: .75; }
+  .signature-plate[data-slot='1'] { transform: translate(-50%, 0); z-index: 2; }
+  .signature-plate[data-slot='2'] { transform: translate(65%, 12%) scale(.82) rotate(14deg); opacity: .75; }
+  .signature-plate__rim { aspect-ratio: 1; border-radius: 50%; padding: 12px; background: #e8ddc9; border: 3px solid #b6a58a; box-shadow: 0 24px 48px rgb(0 0 0 / .35); }
+  .signature-plate img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+  .signature-plate > span { display: block; margin-top: 1.25rem; font-size: clamp(.8rem, 1.2vw, 1.1rem); }
+  .signature-plate:focus-visible { outline: 2px solid #c5a16b; outline-offset: 8px; border-radius: 1rem; }
+  .signatures__controls { display: flex; align-items: center; justify-content: center; gap: 2rem; position: relative; }
+  .signatures__controls button { width: 48px; height: 48px; border: 1px solid #c5a16b; border-radius: 50%; color: #f3ecdf; font-size: 1.25rem; }
+  .signatures__controls a { color: #f3ecdf; text-decoration: underline; text-underline-offset: 6px; }
+  .signatures__controls button:hover { background: #345846; }
+  @media (prefers-reduced-motion: no-preference) {
+    .has-entered .signature-plate__rim { animation: plate-arrive 1.2s ease-out both; }
+    @keyframes plate-arrive { from { transform: translateY(60px) rotate(-20deg); opacity: 0; } to { transform: translateY(0) rotate(0); opacity: 1; } }
+  }
+  @media (prefers-reduced-motion: reduce) { .signature-plate { transition: none; } }
+  @media (max-width: 600px) {
+    .signature-plate { width: 64vw; }
+    .signature-plate__rim { padding: 7px; }
+    .signatures__stage { height: calc(64vw + 70px); }
+  }
+</style>

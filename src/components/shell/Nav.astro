@@ -36,7 +36,7 @@ const orderIsExternal = orderHrefValue.startsWith('http');
     <nav class="nav__links" aria-label="Primary">
       <ul role="list">
         {
-          nav.map((item) => (
+          nav.filter((item) => item.id !== 'menu').map((item) => (
             <li>
               <a class="nav__link" href={`#${item.id}`} data-navlink={item.id}>
                 {t(locale, item.key)}
@@ -49,9 +49,14 @@ const orderIsExternal = orderHrefValue.startsWith('http');
 
     <div class="nav__actions">
       <LangSwitch locale={locale} class="nav__lang" />
-      <Button href={orderHrefValue} variant="primary" external={orderIsExternal} class="nav__order">
-        {t(locale, 'nav.orderNow')}
-      </Button>
+      <a class="nav__quick" href="#menu" data-navlink="menu">
+        <span>{t(locale, 'nav.menu')}</span>
+        <span class="nav__quick-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="m4 3 17 18M3 4l4 4m-2-6 4 4M3 7l3 3c1 1 3 1 4 0M20 3c-5 2-6 5-4 7L4 22M20 3l-1 8-3-1" /></svg></span>
+      </a>
+      <a class="nav__quick nav__quick--order" href={orderHrefValue} target={orderIsExternal ? '_blank' : undefined} rel={orderIsExternal ? 'noopener noreferrer' : undefined}>
+        <span>{t(locale, 'nav.orderNow')}</span>
+        <span class="nav__quick-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3 17h18M5 15a7 7 0 0 1 14 0M12 6V4M10 4h4M4 20h16" /></svg></span>
+      </a>
       <button
         class="nav__toggle"
         type="button"

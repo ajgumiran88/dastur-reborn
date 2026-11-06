@@ -1,0 +1,65 @@
+---
+import type { Locale } from '@/lib/i18n';
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const copy = locale === 'ar' ? {
+  title: 'نقدّم الطعام', emphasis: 'على الطريقة الإماراتية',
+  left: 'نكهات متجذرة في التراث', right: 'ضيافة من القلب',
+  intro: 'من الأرز العطري والمشاوي إلى القهوة والتمر، نحتفي بالنكهات التي تجمعنا. وصفات مستوحاة من التراث الإماراتي، نقدّمها بعناية ولمسة معاصرة لتشاركوا لحظات جميلة حول المائدة.',
+  captions: ['نكهات تجمعنا', 'من المشواة إلى المائدة', 'روح الضيافة'],
+  alts: ['طبق أرز مع اللحم والتوابل', 'تشكيلة من المشاوي', 'تمر وقهوة للضيافة'],
+  note: 'صور توضيحية للعرض؛ ليست صوراً لأطباق دستور الفعلية.',
+} : {
+  title: 'Serving', emphasis: 'the Emirati Way',
+  left: 'Rooted in tradition', right: 'Shared with warmth',
+  intro: 'From fragrant rice and generous grills to coffee and dates, we celebrate the flavours that bring people together. Inspired by Emirati heritage and presented with contemporary care, every dish invites a moment of connection around the table.',
+  captions: ['Flavours that bring us together', 'From the grill to the table', 'The spirit of hospitality'],
+  alts: ['A fragrant rice dish with meat and spices', 'A generous selection of grilled food', 'Dates and coffee for a welcoming table'],
+  note: 'Sample photography for illustration; not photographs of DASTUR’s actual dishes.',
+};
+const photos = ['rice.jpg', 'grill.jpg', 'coffee-dates.jpg'];
+---
+<section id="serving" class="serving" aria-labelledby="serving-title">
+  <div class="container serving__inner">
+    <header class="serving__header">
+      <p class="serving__aside">{copy.left}</p>
+      <h2 id="serving-title">{copy.title}<span>{copy.emphasis}</span></h2>
+      <p class="serving__aside">{copy.right}</p>
+      <p class="serving__intro">{copy.intro}</p>
+    </header>
+    <div class="serving__photos">
+      {photos.map((photo, i) => (
+        <figure class="serving__photo">
+          <img src={`/images/menu-food/${photo}`} alt={copy.alts[i]} width="700" height="800" loading="lazy" decoding="async" />
+          <figcaption><span aria-hidden="true">0{i + 1}</span>{copy.captions[i]}</figcaption>
+        </figure>
+      ))}
+    </div>
+    <p class="serving__note">{copy.note}</p>
+  </div>
+</section>
+<style>
+  #serving.serving { background: #c6baa6; color: #33271e; padding-block: clamp(3rem, 6vw, 6rem); }
+  .serving__inner { max-width: 1600px; }
+  .serving__header { display: grid; grid-template-columns: 1fr minmax(0, 2.4fr) 1fr; align-items: center; gap: 1.25rem 2rem; max-width: 1200px; margin: 0 auto clamp(2.5rem, 4vw, 4rem); text-align: center; }
+  #serving h2 { font-size: clamp(2.5rem, 5vw, 5.5rem); line-height: 1.03; font-weight: 400; color: var(--palm); letter-spacing: -.025em; }
+  .serving__header h2 span { display: block; }
+  .serving__aside { font-size: .72rem; line-height: 1.6; text-transform: uppercase; letter-spacing: .12em; }
+  .serving__intro { grid-column: 2; font-size: clamp(.95rem, 1.1vw, 1.05rem); line-height: 1.75; max-width: 58ch; margin-inline: auto; }
+  .serving__photos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(.75rem, 1.2vw, 1.25rem); }
+  .serving__photo { margin: 0; min-width: 0; }
+  .serving__photo img { display: block; width: 100%; height: auto; aspect-ratio: 7 / 8; object-fit: cover; }
+  .serving__photo figcaption { display: flex; align-items: baseline; gap: .8rem; padding-block: 1rem; border-bottom: 1px solid rgb(51 39 30 / .25); font-size: .85rem; line-height: 1.6; }
+  .serving__photo figcaption span { color: var(--palm); font-size: .7rem; letter-spacing: .1em; }
+  .serving__note { margin-top: 1.5rem; font-size: .7rem; line-height: 1.6; text-align: center; }
+  @media (max-width: 899px) {
+    .serving__header { grid-template-columns: 1fr 1fr; }
+    .serving__header h2 { grid-column: 1 / -1; grid-row: 1; }
+    .serving__aside { grid-row: 2; }
+    .serving__intro { grid-column: 1 / -1; }
+  }
+  @media (max-width: 599px) {
+    .serving__photos { grid-template-columns: 1fr; gap: 1.75rem; }
+    .serving__photo img { aspect-ratio: 4 / 3; }
+  }
+</style>

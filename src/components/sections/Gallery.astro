@@ -6,162 +6,88 @@ import { galleryItems } from '@/config/gallery';
 import { t, type Locale } from '@/lib/i18n';
 import { preventWidows } from '@/lib/typography';
 
-interface Props {
-  locale: Locale;
-}
+interface Props { locale: Locale; }
 const { locale } = Astro.props;
-
-const accentVar: Record<string, string> = {
-  palm: 'var(--palm)',
-  oud: 'var(--oud)',
-  indigo: 'var(--indigo)',
-  sand: 'var(--sand-300)',
-};
+const foodPhotos = [
+  { image: 'rice.jpg', en: 'Fragrant signature rice', ar: 'أرز مميز عطري' },
+  { image: 'dessert.jpg', en: 'A sweet ending', ar: 'ختام حلو' },
+  { image: 'grill.jpg', en: 'From the grill', ar: 'من المشواة' },
+  { image: 'coffee-dates.jpg', en: 'Coffee and hospitality', ar: 'قهوة وضيافة' },
+];
+const packaging = galleryItems.filter((item) => item.kind === 'photo').slice(0, 2);
 ---
 
 <Section id="gallery" theme="sand" labelledby="gal-title">
-  <div class="container">
-    <div class="gal__head" data-animate>
+  <div class="container heritage-gallery">
+    <div class="heritage-gallery__heading">
       <p class="eyebrow"><Motif name="diamond" />{t(locale, 'gallery.eyebrow')}</p>
-      <h2 id="gal-title" class="gal__title">{preventWidows(t(locale, 'gallery.title'))}</h2>
-      <p class="lead gal__intro measure">{preventWidows(t(locale, 'gallery.intro'))}</p>
+      <h2 id="gal-title">{preventWidows(t(locale, 'gallery.title'))}</h2>
+      <p>{preventWidows(t(locale, 'gallery.intro'))}</p>
     </div>
-
-    <div class="gal__grid" data-animate data-animate-delay="80">
-      {
-        galleryItems.map((item) => (
-          <figure class={`gal__item gal__item--${item.span}`}>
-            {item.kind === 'photo' && item.image ? (
-              <Image
-                src={item.image}
-                alt={item.alt[locale]}
-                widths={[320, 560, 820]}
-                sizes="(max-width: 700px) 90vw, 40vw"
-                loading="lazy"
-                class="gal__img"
-              />
-            ) : (
-              <div
-                class="gal__demo"
-                style={`--g-accent:${accentVar[item.accent ?? 'sand']}`}
-                data-demo
-                role="img"
-                aria-label={item.alt[locale]}
-              >
-                <Motif name={item.motif ?? 'diamond'} />
-                {item.label && <span class="gal__label">{preventWidows(item.label[locale])}</span>}
-                <span class="gal__demoTag">{t(locale, 'gallery.demoImage')}</span>
-              </div>
-            )}
-          </figure>
-        ))
-      }
+    <div class="heritage-gallery__canvas">
+      <div class="heritage-gallery__brand">
+        <img src="/images/dastur-story-logo.png" alt="DASTUR — Ancient Emirati Recipes, Modern Plates" width="1400" height="1120" loading="lazy" />
+      </div>
+      {foodPhotos.map((photo, i) => (
+        <figure class={`heritage-gallery__tile heritage-gallery__tile--${i + 1}`}>
+          <div class="heritage-gallery__arch">
+            <img src={`/images/menu-food/${photo.image}`} alt={photo[locale]} width="600" height="750" loading="lazy" />
+          </div>
+          <figcaption>{photo[locale]}</figcaption>
+        </figure>
+      ))}
+      {packaging.map((item, i) => (
+        <figure class={`heritage-gallery__tile heritage-gallery__tile--${i + 5}`}>
+          <div class="heritage-gallery__arch heritage-gallery__arch--packaging">
+            {item.image && <Image src={item.image} alt={item.alt[locale]} widths={[320, 560, 820]} sizes="(max-width: 700px) 42vw, 20vw" loading="lazy" />}
+          </div>
+          <figcaption>{locale === 'en' ? 'Wrapped in heritage' : 'مغلف بالتراث'}</figcaption>
+        </figure>
+      ))}
     </div>
   </div>
 </Section>
 
 <style>
-  .gal__head {
-    display: flex;
-    flex-direction: column;
-    gap: 0.9rem;
-    max-width: 44ch;
-    margin-bottom: clamp(2rem, 4vw, 3rem);
-  }
-  .gal__title {
-    font-size: var(--fs-h2);
-  }
-  .gal__intro {
-    color: var(--text-muted);
-  }
-
-  /* Multi-column masonry: robust, gap-free, editorial. Items keep varied
-     aspect ratios for asymmetric rhythm. */
-  .gal__grid {
-    columns: 2;
-    column-gap: 0.9rem;
-  }
-  .gal__item {
-    position: relative;
-    break-inside: avoid;
-    margin: 0 0 0.9rem;
+  .heritage-gallery__heading { display: flex; flex-direction: column; align-items: center; gap: 1rem; text-align: center; max-width: 42rem; margin: 0 auto 2rem; }
+  .heritage-gallery__heading h2 { color: var(--palm); font-size: clamp(2rem, 4vw, 3.8rem); line-height: 1.2; letter-spacing: .03em; }
+  .heritage-gallery__heading > p:last-child { color: var(--oud); line-height: 1.7; }
+  .heritage-gallery__canvas { display: grid; grid-template-columns: 1.1fr 1fr .34fr; grid-template-rows: auto auto auto; align-items: stretch; gap: clamp(1rem, 1.5vw, 1.5rem); }
+  .heritage-gallery__brand { grid-column: 2; grid-row: 3; width: min(100%, 300px); align-self: center; justify-self: center; padding: 1.5rem; }
+  .heritage-gallery__brand img { display: block; width: 100%; height: auto; object-fit: contain; }
+  .heritage-gallery__tile { width: 100%; min-width: 0; margin: 0; display: flex; flex-direction: column; }
+  .heritage-gallery__arch {
+    flex: 1;
+    min-height: 0;
+    background: #dfd2ba;
     overflow: hidden;
-    border-radius: var(--r-md);
-    background: var(--sand-100);
-    border: 1px solid var(--hairline);
-    display: block;
-    width: 100%;
   }
-  /* Aspect ratios drive the asymmetry (span name = shape) */
-  .gal__item--std {
-    aspect-ratio: 1 / 1;
+  .heritage-gallery__arch img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
+  .heritage-gallery__tile:hover .heritage-gallery__arch:not(.heritage-gallery__arch--packaging) img { transform: scale(1.04); }
+  .heritage-gallery__arch--packaging { padding: 1rem; background: #e9dfcd; aspect-ratio: 4 / 3; border-radius: 1rem; }
+  .heritage-gallery__arch--packaging img { object-fit: contain; }
+  .heritage-gallery__tile figcaption { color: var(--palm); font-size: .72rem; letter-spacing: .05em; text-align: center; margin-top: .7rem; }
+  .heritage-gallery__tile--1 { grid-column: 1; grid-row: 1 / 3; }
+  .heritage-gallery__tile--1 .heritage-gallery__arch { aspect-ratio: 4 / 5; }
+  .heritage-gallery__tile--2 { grid-column: 3; grid-row: 1; align-self: end; }
+  .heritage-gallery__tile--2 .heritage-gallery__arch { aspect-ratio: 1; border-radius: 50%; }
+  .heritage-gallery__tile--3 { grid-column: 2; grid-row: 1 / 3; padding-top: 18%; }
+  .heritage-gallery__tile--3 .heritage-gallery__arch { border-radius: 0 48% 0 48%; }
+  .heritage-gallery__tile--4 { grid-column: 3; grid-row: 2; }
+  .heritage-gallery__tile--4 .heritage-gallery__arch { aspect-ratio: 1 / 2; border-radius: 1rem; }
+  .heritage-gallery__tile--5 { grid-column: 1; grid-row: 3; }
+  .heritage-gallery__tile--6 { grid-column: 3; grid-row: 3; justify-content: center; }
+  .heritage-gallery__tile--6 .heritage-gallery__arch { flex: 0; aspect-ratio: 3 / 4; }
+  @media (max-width: 700px) {
+    .heritage-gallery__canvas { height: auto; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem 1rem; }
+    .heritage-gallery__brand { grid-column: 1 / -1; grid-row: 4; width: min(80%, 280px); margin: 0 auto; }
+    .heritage-gallery__tile { grid-column: auto; grid-row: auto; width: 100%; padding-top: 0; align-self: stretch; }
+    .heritage-gallery__tile .heritage-gallery__arch { flex: 1; aspect-ratio: 4 / 5; }
+    .heritage-gallery__tile--2 .heritage-gallery__arch { aspect-ratio: 1; flex: 0; }
+    .heritage-gallery__tile--2 { justify-content: center; }
   }
-  .gal__item--wide,
-  .gal__item--big {
-    aspect-ratio: 4 / 3;
-  }
-  .gal__item--tall {
-    aspect-ratio: 3 / 4;
-  }
-  .gal__img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform var(--dur-4) var(--ease-out);
-  }
-  .gal__item:hover .gal__img {
-    transform: scale(1.05);
-  }
-
-  .gal__demo {
-    position: absolute;
-    inset: 0;
-    display: grid;
-    place-items: center;
-    gap: 0.6rem;
-    grid-auto-flow: row;
-    align-content: center;
-    background: var(--sand-100);
-    color: var(--g-accent);
-    text-align: center;
-    padding: 1rem;
-  }
-  .gal__demo :global(.motif) {
-    width: 2.2rem;
-    height: 2.2rem;
-  }
-  .gal__label {
-    font-family: var(--font-display);
-    font-size: 1.3rem;
-    color: var(--oud);
-  }
-  .gal__demoTag {
-    position: absolute;
-    inset-block-end: 0.6rem;
-    inset-inline: 0;
-    font-size: 0.58rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--oud-muted);
-    opacity: 0.7;
-  }
-
-  @media (min-width: 760px) {
-    .gal__grid {
-      columns: 3;
-      column-gap: 1rem;
-    }
-    .gal__item {
-      margin-bottom: 1rem;
-    }
-  }
-
   @media (prefers-reduced-motion: reduce) {
-    .gal__img {
-      transition: none;
-    }
-    .gal__item:hover .gal__img {
-      transform: none;
-    }
+    .heritage-gallery__arch img { transition: none; }
+    .heritage-gallery__tile:hover .heritage-gallery__arch img { transform: none; }
   }
 </style>

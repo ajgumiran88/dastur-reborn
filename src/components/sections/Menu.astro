@@ -1,7 +1,6 @@
 ---
 import Section from '@/components/ui/Section.astro';
 import Motif from '@/components/ui/Motif.astro';
-import DishCard from '@/components/ui/DishCard.astro';
 import { menuCategories } from '@/config/menu';
 import { t, type Locale } from '@/lib/i18n';
 import { preventWidows } from '@/lib/typography';
@@ -25,17 +24,8 @@ const dishData = menuCategories.flatMap((c) =>
 ---
 
 <Section id="menu" theme="sand" labelledby="menu-title">
-  <div class="container">
-    <div class="menu__head" data-animate>
-      <p class="eyebrow"><Motif name="diamond" />{t(locale, 'menu.eyebrow')}</p>
-      <h2 id="menu-title" class="menu__title">{t(locale, 'menu.title')}</h2>
-      <p class="lead menu__intro measure">{preventWidows(t(locale, 'menu.intro'))}</p>
-    </div>
-
-    <p class="menu__demo" role="note">
-      <Motif name="diamond" />{t(locale, 'menu.demoNote')}
-    </p>
-
+  <div class="container menu-split">
+    <h2 id="menu-title" class="sr-only">{t(locale, 'menu.eyebrow')}</h2>
     <div class="menu__content">
       <div class="menu__tabsArea">
         <div class="menu__tabs" role="tablist" aria-label={t(locale, 'menu.title')}>
@@ -68,17 +58,44 @@ const dishData = menuCategories.flatMap((c) =>
               data-panel={cat.id}
               hidden={i !== 0}
             >
-              <h3 class="menu__panelTitle">{t(locale, cat.key)}</h3>
-              <div class="menu__grid">
-                {cat.dishes.map((dish) => (
-                  <DishCard dish={dish} locale={locale} accent={cat.accent} motif={cat.motif} />
-                ))}
+              <div class="menu-split__layout">
+                <div class="menu-split__bill">
+                  <div class="menu-split__billHeading">
+                    <h3>{t(locale, cat.key)}</h3>
+                    <Motif name="diamond" />
+                  </div>
+                  <ul class="menu-split__dishes" role="list">
+                    {cat.dishes.map((dish) => (
+                      <li class="menu-split__dish">
+                        <div class="menu-split__dishHeading">
+                          <h4>{dish.name[locale]}</h4>
+                          <span class="menu-split__price">{dish.currency} {dish.price}</span>
+                        </div>
+                        <p>{preventWidows(dish.desc[locale])}</p>
+                        <button type="button" data-dish={dish.id} aria-haspopup="dialog" aria-controls="dish-modal">{t(locale, 'menu.viewDetails')}</button>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div class="menu-split__feature">
+                  <div class="menu-split__editorial">
+                    <p class="eyebrow">{t(locale, 'menu.eyebrow')}</p>
+                    <h3>{t(locale, 'menu.title')}</h3>
+                    <p>{preventWidows(t(locale, 'menu.intro'))}</p>
+                    <a href="#delivery" class="menu-split__order">{t(locale, 'nav.orderNow')} <span aria-hidden="true">↗</span></a>
+                  </div>
+                  <figure class="menu-split__photo">
+                    <img src={cat.dishes[0].image} alt={cat.dishes[0].name[locale]} width="900" height="675" loading="lazy" />
+                    <figcaption>{cat.dishes[0].name[locale]}</figcaption>
+                  </figure>
+                </div>
               </div>
             </div>
           ))
         }
       </div>
     </div>
+    <p class="menu-split__note" role="note">{t(locale, 'menu.demoNote')}</p>
   </div>
 
   <script type="application/json" id="menu-data" set:html={JSON.stringify(dishData)} is:inline />

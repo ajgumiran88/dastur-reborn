@@ -3,8 +3,8 @@ import { menuCategories } from './menu';
 import { ARABIC_SCRIPT } from '@/lib/typography';
 
 describe('menu', () => {
-  it('shows four complete dishes, each with an image, in every category', () => {
-    expect(menuCategories.length).toBeGreaterThan(0);
+  it('shows eight categories with four dishes each, retaining existing photos', () => {
+    expect(menuCategories).toHaveLength(8);
     for (const category of menuCategories) {
       expect(category.dishes, category.id).toHaveLength(4);
       for (const dish of category.dishes) {
@@ -13,10 +13,14 @@ describe('menu', () => {
     }
   });
 
-  it('adds Sauces & Extras as an eighth category so the tab row completes at four', () => {
-    expect(menuCategories).toHaveLength(8);
-    expect(menuCategories.at(-1)?.id).toBe('sauces');
-    expect(menuCategories.at(-1)?.dishes).toHaveLength(4);
+  it('provides four demo sauces with prices and individual sample images', () => {
+    const sauces = menuCategories.find((category) => category.id === 'sauces')!;
+    expect(sauces.key).toBe('menu.categories.sauces');
+    for (const dish of sauces.dishes) {
+      expect(dish.demo).toBe(true);
+      expect(dish.price).toBeGreaterThan(0);
+      expect(dish.image).toBe(`/images/menu-food/${dish.id}.webp`);
+    }
   });
 
   it('keeps English dish copy free of Arabic script', () => {
