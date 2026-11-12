@@ -42,12 +42,13 @@ header.nav, header.nav.is-scrolled {
   padding-block: clamp(3rem, 5vw, 5rem) 1.75rem;
   min-height: auto;
 }
-#contact.footer .footer__grid { grid-template-columns: 1.35fr 1.2fr .85fr .85fr .65fr; gap: 2rem; align-items: start; }
+#contact.footer .footer__grid { grid-template-columns: 1.2fr 1fr 1fr .85fr .85fr .65fr; gap: 2rem; align-items: start; }
 #contact.footer .footer__brand { grid-column: auto; align-items: flex-start; text-align: start; margin: 0; padding: 0; gap: 1rem; }
-#contact.footer .footer__logo { display: block; width: 120px; height: 96px; object-fit: contain; }
+#contact.footer .footer__logo { display: block; width: 160px; height: 128px; object-fit: contain; }
 #contact.footer .footer__taglineText { font-size: 1.3rem; line-height: 1.4; letter-spacing: .025em; }
 #contact.footer .footer__statement { font-size: .8rem; line-height: 1.7; max-width: 28ch; }
-#contact.footer .footer__h { font-size: .82rem; font-family: var(--font-body); letter-spacing: .18em; color: var(--sand); margin-bottom: 1.5rem; }
+#contact.footer .footer__statement { display: none; }
+#contact.footer .footer__h { font-size: .82rem; font-family: var(--font-body); font-weight: 700; letter-spacing: .18em; color: var(--sand); margin-bottom: 1.5rem; }
 #contact.footer .footer__list { font-size: .85rem; gap: .7rem; }
 #contact.footer .footer__col { grid-column: auto; min-width: 0; }
 #contact.footer .footer__list a { overflow-wrap: anywhere; }
@@ -55,7 +56,7 @@ header.nav, header.nav.is-scrolled {
 #contact.footer .footer__meta dd { font-size: .8rem; line-height: 1.6; }
 #contact.footer .footer__social { gap: .4rem; flex-wrap: wrap; }
 #contact.footer .footer__social a { border: 0; border-radius: 0; width: 36px; height: 36px; }
-#contact.footer .footer__allergen { margin-top: 3rem; text-align: start; white-space: normal; }
+#contact.footer .footer__allergen { margin-top: 3rem; text-align: center; white-space: normal; }
 #contact.footer .footer__bottom { margin-top: 1.5rem; gap: 1.5rem; text-align: start; }
 @media (max-width: 1079px) {
   .nav .nav__bar { gap: .5rem; }

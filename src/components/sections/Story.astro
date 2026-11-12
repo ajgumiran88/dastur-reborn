@@ -10,6 +10,7 @@ interface Props {
   locale: Locale;
 }
 const { locale } = Astro.props;
+const storyTitleLines = locale === 'en' ? ['A Story Shaped by', 'Land and Sea'] : [t(locale, 'story.title')];
 
 const symbols = [
   { key: 'land', motif: 'palm' as const },
@@ -27,10 +28,10 @@ const symbols = [
     <div class="container story__content">
       <div class="story__panel">
         <p class="eyebrow" data-animate>
-          <Motif name="diamond" />{t(locale, 'story.eyebrow')}
+          {t(locale, 'story.eyebrow')}
         </p>
         <h2 class="story__title" id="story-title" data-animate data-animate-delay="60">
-          {t(locale, 'story.title')}
+          {storyTitleLines.map((line) => <span>{line}</span>)}
         </h2>
         <div class="story__body" data-animate data-animate-delay="120">
           <p>{preventWidows(t(locale, 'story.p1'))}</p>
@@ -93,9 +94,9 @@ const symbols = [
   .story__content {
     position: relative;
     z-index: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: start;
     gap: clamp(1.75rem, 3vw, 2.5rem);
     min-height: inherit;
     padding-block: clamp(2.5rem, 5vw, 4.5rem);
@@ -113,6 +114,7 @@ const symbols = [
     max-width: 13ch;
     line-height: 1.1;
   }
+  .story__title span { display: block; }
 
   .story__body {
     display: flex;
@@ -127,9 +129,9 @@ const symbols = [
   }
 
   .story__symbols {
-    max-width: min(60rem, 64%);
-    padding-top: clamp(1.25rem, 2vw, 1.75rem);
-    margin-top: clamp(1rem, 2vw, 1.5rem);
+    max-width: none;
+    padding-top: 0;
+    margin-top: clamp(3.5rem, 6vw, 6rem);
   }
 
   .story__symbols ul {
@@ -191,6 +193,9 @@ const symbols = [
     .story__symbols {
       max-width: 100%;
     }
+
+    .story__content { display: flex; flex-direction: column; }
+    .story__symbols { margin-top: 1.5rem; }
 
     .story__symbols ul {
       grid-template-columns: 1fr;

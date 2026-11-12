@@ -73,7 +73,7 @@ export const site: SiteConfig = {
   socials: [
     { name: 'instagram', label: 'Instagram', url: '#', enabled: true },
     { name: 'tiktok', label: 'TikTok', url: '#', enabled: true },
-    { name: 'facebook', label: 'Facebook', url: '#', enabled: false },
+    { name: 'facebook', label: 'Facebook', url: '#', enabled: true },
   ],
   deliveryPlatforms: [
     // Enable/disable per confirmed partnership. Do NOT enable unconfirmed platforms.

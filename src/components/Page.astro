@@ -10,13 +10,11 @@ import Footer from '@/components/shell/Footer.astro';
 
 import Hero from '@/components/sections/Hero.astro';
 import SignatureDishes from '@/components/sections/SignatureDishes.astro';
-import Story from '@/components/sections/Story.astro';
 import Menu from '@/components/sections/Menu.astro';
 import Serving from '@/components/sections/Serving.astro';
 import Experience from '@/components/sections/Experience.astro';
 import Packaging from '@/components/sections/Packaging.astro';
 import WhyDastur from '@/components/sections/WhyDastur.astro';
-import Delivery from '@/components/sections/Delivery.astro';
 import Gallery from '@/components/sections/Gallery.astro';
 
 import type { Locale } from '@/lib/i18n';
@@ -36,8 +34,6 @@ const { locale } = Astro.props;
     <SignatureDishes locale={locale} />
     <Menu locale={locale} />
     <Serving locale={locale} />
-    <Delivery locale={locale} />
-    <Story locale={locale} />
     <Experience locale={locale} />
     <Packaging locale={locale} />
     <Gallery locale={locale} />
