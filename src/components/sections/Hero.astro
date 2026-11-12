@@ -29,11 +29,11 @@ const heroTitleLines = locale === 'en' ? ['Ancient Emirati Recipes,', 'Modern Pl
 
   <div class="container hero__inner">
     <p class="eyebrow hero__eyebrow" data-animate data-animate-delay="0">
-      <Motif name="diamond" />{t(locale, 'hero.eyebrow')}
+      {t(locale, 'hero.eyebrow')}
     </p>
     <h1 id="hero-title" class="hero__title" data-animate data-animate-delay="80">
-      {heroTitleLines.map((line) => (
-        <span class="hero__titleLine">{line}</span>
+      {heroTitleLines.map((line, i) => (
+        <span class="hero__titleLine">{line}{i === 0 && ' '}</span>
       ))}
     </h1>
     <p class="lead hero__lead measure" data-animate data-animate-delay="160">

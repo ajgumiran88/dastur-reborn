@@ -539,17 +539,13 @@ html[lang='ar'] .drawer__num {
   }
 
   /* Balance the diamond so the label shares the title's center axis. */
-  #home .hero__eyebrow::after {
-    content: '';
-    width: 1em;
-    height: 1em;
-  }
+  #home .hero__eyebrow::after { display: none; }
 
   #home .hero__title {
     max-width: none;
     width: 100%;
     margin-inline: auto;
-    font-size: clamp(1.35rem, 7.15vw, 2.05rem);
+    font-size: clamp(1.25rem, 6.6vw, 1.9rem);
     line-height: 1.15;
   }
 
